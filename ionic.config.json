@@ -1,0 +1,7 @@
+{
+  "name": "cheisen",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
