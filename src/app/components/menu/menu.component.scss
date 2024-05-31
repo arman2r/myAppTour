@@ -1,0 +1,13 @@
+.sidenav-menu{
+    --width: 350px;
+    background:rgba(var(--ion-color-primary-rgb), 0.5)
+}
+
+.max-width-content{
+    width: calc(100% - 40px);
+}
+
+ion-avatar{
+    width: 60px;
+    height: 60px;
+}

@@ -1,0 +1,59 @@
+<ion-menu
+  [type]="menuType"
+  content-id="main-content"
+  class="sidenav-menu none-bg ion-padding"
+>
+  <ion-row
+    class="ion-padding none-bg max-width-content ion-justify-content-around full-height"
+  >
+    <ion-col size="12">
+      <ion-item class="none-bg" lines="none">
+        <ion-avatar slot="start">
+          <img
+            alt="Silhouette of a person's head"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          />
+        </ion-avatar>
+        <ion-label class="item-text-wrap">
+          <h3>¡Hola de nuevo!</h3>
+          <ion-text>
+            <h2>Usuario de prueba 1</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <div class="ion-padding-top">
+        <ion-item class="none-bg" lines="none">
+          <div class="ion-activatable ripple-parent rectangle">
+            <ion-ripple-effect>
+              <ion-label>Tendencias</ion-label>
+            </ion-ripple-effect>
+          </div>
+        </ion-item>
+        <ion-item class="none-bg" lines="none">
+          <ion-label>Favoritos</ion-label>
+        </ion-item>
+        <ion-item class="none-bg" lines="none">
+          <ion-label>Promociones</ion-label>
+        </ion-item>
+        <ion-item class="none-bg" lines="none">
+          <ion-label>Compras y reservas</ion-label>
+        </ion-item>
+      </div>
+    </ion-col>
+    <ion-col size="12" class="col-content-end">
+      <div class="ion-padding-top">
+        <ion-item class="none-bg" lines="none">
+          <ion-label>Configuración</ion-label>
+        </ion-item>
+        <ion-item class="none-bg" lines="none">
+          <ion-label>PQR</ion-label>
+        </ion-item>
+        <ion-item class="none-bg" lines="none">
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-menu>

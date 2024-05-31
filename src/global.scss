@@ -32,6 +32,80 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* @import "@ionic/angular/css/palettes/dark.class.css"; 
+@import '@ionic/angular/css/palettes/dark.system.css';*/
+
+html {
+	--ion-dynamic-font: var(--ion-default-dynamic-font);
+	--ion-font-family: "Quicksand", sans-serif;
+}
+
+body{
+	background-color: rgba(var(--ion-color-primary-rgb), 0.5); 
+}
+
+.search-bar-header {
+    --box-shadow: 0;
+}
+
+.transition-search {
+    transition: all ease .3s;
+}
+
+.toggle-toolbar-search {
+    height: 0px;
+}
+
+ion-menu::part(backdrop) {
+    background-color: rgba(var(--ion-color-primary-rgb), 0.5);
+}
+
+ion-menu::part(container) {
+    background-color: rgba(var(--ion-color-primary-rgb), 0.5);
+}
+
+.none-bg{
+	--background: transparent !important;
+	--color: var(--ion-color-light)
+}
+
+#main-content {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	left: 0px;
+	background-color: rgba(var(--ion-color-primary-rgb), 1);
+	&::before{
+		content: '';
+		position: absolute;
+		left: 10px;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		width: 0px;
+		border-radius: 60px;
+		height: 60px;
+		background-color: rgba(var(--ion-color-light-rgb), 0.5);	
+	}
+	&.menu-content-open{
+		border-top-left-radius: 50px;
+		border-bottom-left-radius: 50px;
+		left: -40px;
+		padding-left: 20px;
+		background-color: rgba(var(--ion-color-primary-rgb), 1);
+		&::before{
+			width: 4px;
+		}
+	}
+}
+
+.full-height{
+	height: 100%;
+}
+
+.col-content-end{
+	display: flex;
+	align-items: end;
+}
