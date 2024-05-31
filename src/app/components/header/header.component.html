@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="none-bg">
+    <ion-buttons slot="start">
+      @if (previousRoute !== './') {
+        <ion-back-button [defaultHref]="previousRoute"></ion-back-button>
+      }
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title size="medium">{{ headerProps.pageTitle }}</ion-title>
+    <ion-buttons slot="secondary">
+      @if (headerProps.search) {
+      <ion-button (click)="toggleSearch()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar
+    color="secondary"
+    [ngClass]="{ 'toggle-toolbar-search': onOpenSearch }"
+    class="transition-search"
+  >
+    <ion-searchbar color="secondary" class="search-bar-header"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>

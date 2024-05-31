@@ -1,26 +1,23 @@
 import { Component } from '@angular/core';
-import { IonApp, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonMenu, IonMenuButton, IonRouterOutlet, IonSearchbar, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonApp, IonContent, IonRouterOutlet } from '@ionic/angular/standalone';
 import { MenuComponent } from './components/menu/menu.component';
-import { FormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import {addIcons} from 'ionicons';
-import {search} from 'ionicons/icons';
+import { HeaderComponent } from './components/header/header.component';
+import { headerProperties } from './interfaces/header.interface';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet, MenuComponent, IonContent, IonButtons, IonIcon, IonMenuButton, IonButton, IonMenu, IonHeader, IonTitle, IonToolbar, NgClass, IonSearchbar, FormsModule],
+  imports: [IonApp, IonRouterOutlet, MenuComponent, IonContent, HeaderComponent],
 })
 export class AppComponent {
-
-  onOpenSearch = true;
+ 
+  headerProps: headerProperties = {
+    pageTitle: 'Experiencias',
+    search: true
+  }
   
-  constructor() {
-    addIcons({search});
+  constructor() { 
   }
-
-  toggleSearch(){
-    this.onOpenSearch = !this.onOpenSearch;
-  }
+ 
 }

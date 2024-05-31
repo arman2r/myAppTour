@@ -99,6 +99,9 @@ ion-menu::part(container) {
 			width: 4px;
 		}
 	}
+	ion-content{
+		--background: transparent !important; 
+	}
 }
 
 .full-height{

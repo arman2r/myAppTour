@@ -31,9 +31,14 @@
             </ion-ripple-effect>
           </div>
         </ion-item>
-        <ion-item class="none-bg" lines="none">
-          <ion-label>Favoritos</ion-label>
-        </ion-item>
+        <ion-menu-toggle
+          [routerLink]="['/favoritos']"
+          routerLinkActive="router-link-active"
+        >
+          <ion-item class="none-bg" lines="none">
+            <ion-label>Favoritos</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
         <ion-item class="none-bg" lines="none">
           <ion-label>Promociones</ion-label>
         </ion-item>
