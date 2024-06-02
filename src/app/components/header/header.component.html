@@ -1,10 +1,12 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="none-bg">
     <ion-buttons slot="start">
-      @if (previousRoute !== './') {
-        <ion-back-button [defaultHref]="previousRoute"></ion-back-button>
+      @if (previousRoute !== './' && previousRoute !== '/.') {
+        <ion-back-button [defaultHref]="[this.previousRoute]"></ion-back-button>
+      } @else {
+        <ion-menu-button auto-hide="false"></ion-menu-button>
       }
-      <ion-menu-button auto-hide="false"></ion-menu-button>
+      
     </ion-buttons>
     <ion-title size="medium">{{ headerProps.pageTitle }}</ion-title>
     <ion-buttons slot="secondary">

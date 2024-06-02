@@ -14,22 +14,43 @@ import { headerProperties } from 'src/app/interfaces/header.interface';
   standalone: true,
   imports: [IonButtons, IonIcon, IonMenuButton, IonButton, IonMenu, IonHeader, IonTitle, IonToolbar, NgClass, IonSearchbar, FormsModule, IonBackButton]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   @Input({required: true}) headerProps!: headerProperties;
-  previousRoute: string = './';
+  previousRoute: string = '/';
   onOpenSearch = true;
   
   constructor(private router: Router) {
     addIcons({search});
 
+     
+  }
+
+  ngOnInit() {
+    // Suscribirse al evento de cambio de ruta
     this.router.events.subscribe(event => {
+      this.previousRoute = '';
       if (event instanceof NavigationEnd) {
-          console.log('entro aqui');
-          this.previousRoute = this.router.url; // Store the current route
+        // Lógica para detectar cambio de ruta aquí
+        console.log('Ruta cambiada:', event.url);
+        const getRout = event.url.substring(0, event.url.lastIndexOf('/'));
+        if(event.url !== '/'){
+          this.previousRoute = getRout
+        } else {
+          this.previousRoute = './'
+        }
+        console.log('Ruta cambiada 2:', this.previousRoute);
       }
     });
   }
+
+  goBack() {
+    let currentUrl = this.router.url;
+    let parts = currentUrl.split('/');
+    parts.pop(); // Eliminar la última parte de la URL
+    let newUrl = parts.join('/'); // Reconstruir la URL sin la última parte
+    this.router.navigateByUrl(newUrl);
+  } 
 
   toggleSearch(){
     this.onOpenSearch = !this.onOpenSearch;
