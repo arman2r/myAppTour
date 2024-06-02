@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
       this.previousRoute = '';
       if (event instanceof NavigationEnd) {
         // Lógica para detectar cambio de ruta aquí
-        console.log('Ruta cambiada:', event.url);
+        //console.log('Ruta cambiada:', event.url);
         const getRout = event.url.substring(0, event.url.lastIndexOf('/'));
         if(event.url !== '/'){
           this.previousRoute = getRout
@@ -42,14 +42,6 @@ export class HeaderComponent implements OnInit {
         console.log('Ruta cambiada 2:', this.previousRoute);
       }
     });
-  }
-
-  goBack() {
-    let currentUrl = this.router.url;
-    let parts = currentUrl.split('/');
-    parts.pop(); // Eliminar la última parte de la URL
-    let newUrl = parts.join('/'); // Reconstruir la URL sin la última parte
-    this.router.navigateByUrl(newUrl);
   } 
 
   toggleSearch(){

@@ -1,0 +1,80 @@
+<app-header [headerProps]="headerProps"></app-header>
+
+<ion-content color="primary" class="ion-padding">
+  <div class="ion-padding-start ion-padding-end">
+    <h2>Vamos a iniciar con unos datos básicos</h2>
+    <sub
+      >Recuerda que los campos marcados con
+      <ion-text color="warning">*</ion-text> son obligatorios</sub
+    >
+  </div>
+  <br /><br />
+  <ion-row>
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="6" sizeXl="6">
+      <ion-item color="primary">
+        <ion-input
+          color="light"
+          label="Nombres"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Ingrese sus nombres"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="6" sizeXl="6">
+      <ion-item color="primary">
+        <ion-input
+          color="light"
+          label="Apellidos"
+          label-placement="floating"
+          fill="outline"
+          placeholder="Ingrese sus apellidos"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="6" sizeXl="6">
+      <ion-item color="primary">
+        <ion-input
+          color="light"
+          label="Email"
+          label-placement="floating"
+          type="email"
+          fill="outline"
+          placeholder="email@domain.com"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col sizeXs="12" sizeSm="12" sizeMd="6" sizeLg="6" sizeXl="6">
+      <ion-item color="primary">
+        <ion-input
+          color="light"
+          label="Teléfono"
+          label-placement="floating"
+          type="tel"
+          fill="outline"
+          placeholder="000-000-0000"
+          [value]="inputModel"
+          (ionInput)="onInput($event)"
+          #ionInputEl
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item color="primary">
+        <ion-toggle justify="space-between"
+          >Space Between Label and Control</ion-toggle
+        >
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item color="primary">
+        <ion-checkbox color="light" justify="space-between" [indeterminate]="true">Acepta nuestras politicas</ion-checkbox>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12">
+      <ion-item color="primary">
+        <ion-checkbox color="light" justify="space-between" [indeterminate]="true">Acepta nuestro manejo al tratamiento de datos</ion-checkbox>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-content>

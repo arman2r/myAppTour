@@ -25,6 +25,26 @@ export const routes: Routes = [
   {
     path: 'favoritos',
     loadComponent: () => import('./pages/favorites/favorites.page').then( m => m.FavoritesPage)
+  },
+  {
+    path: 'register/general-information',
+    loadComponent: () => import('./pages/register/general-information/general-information.page').then( m => m.GeneralInformationPage)
+  },
+  {
+    path: 'register/individual-information',
+    loadComponent: () => import('./pages/register/individual-information/individual-information.page').then( m => m.IndividualInformationPage)
+  },
+  {
+    path: 'register/uploading-documents',
+    loadComponent: () => import('./pages/register/uploading-documents/uploading-documents.page').then( m => m.UploadingDocumentsPage)
+  },
+  {
+    path: 'register/confirm-email',
+    loadComponent: () => import('./pages/register/confirm-email/confirm-email.page').then( m => m.ConfirmEmailPage)
+  },
+  {
+    path: 'register/confirm-phone',
+    loadComponent: () => import('./pages/register/confirm-phone/confirm-phone.page').then( m => m.ConfirmPhonePage)
   }
   
 ];

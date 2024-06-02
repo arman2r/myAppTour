@@ -1,10 +1,12 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="none-bg">
     <ion-buttons slot="start">
-      @if (previousRoute !== './' && previousRoute !== '/.') {
+      @if (previousRoute !== './' && previousRoute !== '/.' && previousRoute !== '/register') {
         <ion-back-button [defaultHref]="[this.previousRoute]"></ion-back-button>
       } @else {
-        <ion-menu-button auto-hide="false"></ion-menu-button>
+        @if(previousRoute !== '/register'){
+          <ion-menu-button auto-hide="false"></ion-menu-button>
+        } 
       }
       
     </ion-buttons>
