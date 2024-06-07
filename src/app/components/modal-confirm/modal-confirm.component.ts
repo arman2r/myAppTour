@@ -1,43 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, IonButton, IonButtons, IonContent, IonHeader, IonModal, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { ActionSheetController, IonButton, IonButtons, IonContent, IonHeader, IonModal, IonText, IonTitle, IonToolbar, ModalController } from '@ionic/angular/standalone';
+import { SanitizeService } from 'src/app/services/sanitize.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-confirm',
   templateUrl: './modal-confirm.component.html',
   styleUrls: ['./modal-confirm.component.scss'],
   standalone: true,
-  imports: [IonHeader, IonTitle, IonToolbar, IonContent, IonButton, IonModal, IonButtons]
+  imports: [IonHeader, IonTitle, IonToolbar, IonContent, IonButton, IonModal, IonButtons, IonText]
 })
 export class ModalConfirmComponent implements OnInit {
 
   presentingElement: any = undefined;
+  value = environment.politics
 
-  constructor(private actionSheetCtrl: ActionSheetController) { }
+  constructor(private actionSheetCtrl: ActionSheetController, private modalCtrl: ModalController, private sanitizeService: SanitizeService) { }
 
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');
   }
 
-  canDismiss = async () => {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Are you sure?',
-      buttons: [
-        {
-          text: 'Yes',
-          role: 'confirm',
-        },
-        {
-          text: 'No',
-          role: 'cancel',
-        },
-      ],
-    });
+  getSanitizedHtml(): string {
+    return this.sanitizeService.sanitizeHtml(this.value.description) as string;
+  }
 
-    actionSheet.present();
+  cancel() {
+    return this.modalCtrl.dismiss(null, 'cancel');
+  }
 
-    const { role } = await actionSheet.onWillDismiss();
-
-    return role === 'confirm';
-  };
+  confirm() {
+    return this.modalCtrl.dismiss(true, 'confirm');
+  }
 
 }

@@ -82,6 +82,8 @@
             color="light"
             justify="space-between"
             [indeterminate]="true"
+            (click)="openModal()"
+            [checked]="confirm"
             >Acepta nuestras politicas</ion-checkbox
           >
         </ion-item>
@@ -104,6 +106,7 @@
           shape="round"
           size="large"
           [disabled]="myGeneralFormUser.invalid || myGeneralFormUser.controls['politics'].value !== true || myGeneralFormUser.controls['infoProcessing'].value !== true"
+          (click)="submit()"
           >Continuar</ion-button
         >
       </ion-col>
