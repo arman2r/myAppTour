@@ -7,6 +7,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { LocalService } from 'src/app/services/local.service';
 import { ModalConfirmComponent } from 'src/app/components/modal-confirm/modal-confirm.component';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-general-information',
@@ -45,7 +46,7 @@ export class GeneralInformationPage implements OnInit {
     this.ionInputEl.value = this.inputModel = filteredValue;
   }
 
-  constructor(private formBuilder: FormBuilder, private localStore: LocalService, private modalCtrl: ModalController) { }
+  constructor(private formBuilder: FormBuilder, private localStore: LocalService, private modalCtrl: ModalController, private router: Router) { }
 
   ngOnInit() {
     this.buildForm()
@@ -112,9 +113,10 @@ export class GeneralInformationPage implements OnInit {
   }
 
   submit() {
-    const valueForm = this.myGeneralFormUser.value.toString();
-    console.log(valueForm)
-    this.localStore.saveData('dataPrevUser', valueForm);
+    const valueForm = this.myGeneralFormUser.value;
+    console.log([{...valueForm}])
+    this.localStore.saveData('dataPrevUser', JSON.stringify(valueForm));
+    this.router.navigate(['register/individual-information'])
   }
 
 }

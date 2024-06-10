@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   @Input({required: true}) headerProps!: headerProperties;
   previousRoute: string = '/';
+  currentUrL!: string;
   onOpenSearch = true;
   
   constructor(private router: Router) {
@@ -33,6 +34,8 @@ export class HeaderComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         // Lógica para detectar cambio de ruta aquí
         //console.log('Ruta cambiada:', event.url);
+        this.currentUrL = event.url;
+        console.log('this.currentUrL', this.currentUrL)
         const getRout = event.url.substring(0, event.url.lastIndexOf('/'));
         if(event.url !== '/'){
           this.previousRoute = getRout

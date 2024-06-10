@@ -11,15 +11,15 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage)
   }, 
   {
-    path: 'agencias',
+    path: 'agencies',
     loadComponent: () => import('./pages/agencies/agencies.page').then( m => m.AgenciesPage)
   },
   {
-    path: 'agencias/:agency',
+    path: 'agencies/:agency',
     loadComponent: () => import('./pages/agency/agency.page').then(m => m.AgencyPage), 
   },
   {
-    path: 'agencias/:agency/:experience',
+    path: 'agencies/:agency/:experience',
     loadComponent: () => import('./pages/detail-experience/detail-experience.page').then(m => m.DetailExperiencePage)
   },
   {

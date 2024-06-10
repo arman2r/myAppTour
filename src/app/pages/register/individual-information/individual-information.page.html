@@ -1,12 +1,101 @@
 <app-header [headerProps]="headerProps"></app-header>
 
-<ion-content color="primary" class="ion-padding">
+<ion-content [fullscreen]="true" color="primary" class="ion-padding">
   <div class="ion-padding-start ion-padding-end">
-    <h2>Vamos a iniciar con unos datos básicos</h2>
+    <h2>Registremos su agencia</h2>
     <sub
       >Recuerda que los campos marcados con
       <ion-text color="warning">*</ion-text> son obligatorios</sub
     >
   </div>
   <br />
+
+  <form class="ion-padding" [formGroup]="individualDataForm">
+    <ion-row>
+      <ion-col
+        class="ion-margin-top"
+        sizeXs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="6"
+        sizeXl="6"
+      >
+        <ion-select
+          color="light"
+          label="Tipo de documento"
+          interface="action-sheet"
+          label-placement="floating"
+          fill="outline"
+          formControlName="documentType"
+          errorText="Este campo es requerido"
+        >
+          <ion-select-option value="1">Cedula</ion-select-option>
+          <ion-select-option value="2"
+            >Registro Nacional de turismo</ion-select-option
+          >
+          <ion-select-option value="3">Camara Comercio</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col
+        class="ion-margin-top"
+        sizeXs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="6"
+        sizeXl="6"
+      >
+        <ion-input
+          color="light"
+          label="Número de documento" 
+          label-placement="floating"
+          fill="outline"
+          pattern="[0-9]*"
+          formControlName="documentNumber"
+          (keypress)="validateNumber($event)"
+          errorText="Mínimo 8 carácteres y máximo 10 carácteres"
+        ></ion-input>
+      </ion-col>
+      <ion-col
+        class="ion-margin-top"
+        sizeXs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="6"
+        sizeXl="6"
+      >
+        <ion-input
+          color="light"
+          label="Fecha de expedición"
+          type="date"
+          label-placement="floating"
+          fill="outline"
+          readonly="true"
+          (click)="openDateTime()"
+          formControlName="documentExpedition"
+          errorText="Este campo es requerido"
+        >
+          <ion-button fill="clear" slot="end" aria-label="Show/hide">
+            <ion-icon
+              color="light"
+              slot="icon-only"
+              name="calendar"
+              aria-hidden="true"
+            ></ion-icon>
+          </ion-button>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
+<ion-footer class="ion-padding">
+  <ion-button
+    color="secondary"
+    expand="block"
+    shape="round"
+    size="large"
+    class="ion-margin"
+    (click)="submit()"
+    [disabled]="!individualDataForm.valid"
+    >Continuar</ion-button
+  >
+</ion-footer>
