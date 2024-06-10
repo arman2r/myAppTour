@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetController, IonButton, IonButtons, IonContent, IonHeader, IonModal, IonText, IonTitle, IonToolbar, ModalController } from '@ionic/angular/standalone';
-import { SanitizeService } from 'src/app/services/sanitize.service';
-import { environment } from 'src/environments/environment';
+import { SanitizeService } from 'src/app/services/sanitize.service'; 
 
 @Component({
   selector: 'app-modal-confirm',
@@ -13,12 +12,14 @@ import { environment } from 'src/environments/environment';
 export class ModalConfirmComponent implements OnInit {
 
   presentingElement: any = undefined;
-  value = environment.politics
+  value!: any;
+  @Input() data: any;
 
   constructor(private actionSheetCtrl: ActionSheetController, private modalCtrl: ModalController, private sanitizeService: SanitizeService) { }
 
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');
+    this.value = this.data
   }
 
   getSanitizedHtml(): string {

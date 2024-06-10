@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControlName, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonCheckbox, IonCol, IonContent, IonHeader, IonInput, IonItem, IonRow, IonText, IonTitle, IonToggle, IonToolbar, IonButton, ModalController } from '@ionic/angular/standalone';
+import { IonCheckbox, IonCol, IonContent, IonHeader, IonInput, IonItem, IonRow, IonText, IonTitle, IonToggle, IonToolbar, IonButton, ModalController, CheckboxCustomEvent } from '@ionic/angular/standalone';
 import { headerProperties } from 'src/app/interfaces/header.interface';
-import { HeaderComponent } from 'src/app/components/header/header.component'; 
+import { HeaderComponent } from 'src/app/components/header/header.component';
 import { LocalService } from 'src/app/services/local.service';
 import { ModalConfirmComponent } from 'src/app/components/modal-confirm/modal-confirm.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-general-information',
@@ -18,6 +19,9 @@ export class GeneralInformationPage implements OnInit {
 
   myGeneralFormUser!: FormGroup;
   confirm = false;
+  isInfo = false;
+  politics = environment.politics
+  handlingInformation = environment.managementInformation
 
   headerProps: headerProperties = {
     pageTitle: 'Información general',
@@ -28,7 +32,7 @@ export class GeneralInformationPage implements OnInit {
 
   @ViewChild('ionInputEl', { static: true }) ionInputEl!: IonInput;
 
-  onInput(ev:any) {
+  onInput(ev: any) {
     const value = ev.target!.value;
 
     // Removes non alphanumeric characters
@@ -54,31 +58,62 @@ export class GeneralInformationPage implements OnInit {
       email: ['', [Validators.minLength(5), Validators.maxLength(50), Validators.email, Validators.required]],
       phone: ['', [Validators.minLength(5), Validators.maxLength(20), Validators.required]],
       isAgency: [false],
-      politics: ['', [Validators.required]],
-      infoProcessing: ['', [Validators.required]],
+      politics: [false, [Validators.required]],
+      infoProcessing: [false, [Validators.required]],
     })
   }
 
-  async openModal() {
-    
+  async openModal(event: any, selfData: any, type: string) {
+    console.log(selfData)
+    console.log(event.target.checked)  
     const modal = await this.modalCtrl.create({
       component: ModalConfirmComponent,
+      componentProps: {
+        data: selfData
+      }
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
-    console.log(data  !== null)
-    if (role === 'confirm') { 
-      if(data !== null){
-        this.confirm = true;
+    console.log(data, role)
+    console.log('confirm',this.confirm)
+    if (role !== 'cancel') {
+      console.log('entro 1')
+      if (data !== null) {
+        if(type === 'politics'){
+          this.confirm = true;
+        } else {
+          this.isInfo = true
+        } 
+        event.target.checked = true  
+        console.log('entro 1-1', this.confirm, this.isInfo)
       } else {
-        this.confirm = false;
+        
+        if(type === 'politics'){
+          this.confirm = false;
+        } else {
+          this.isInfo = false
+        } 
+        event.target.checked = false  
+        console.log('entro 1-2', this.confirm, this.isInfo)
       }
-      
+    } else {
+     
+      if(type === 'politics'){
+        this.confirm = false;
+      } else {
+        this.isInfo = false
+      } 
+      event.target.checked = false  
+      console.log('entro 2', this.confirm, this.isInfo)
     }
+
+    console.log('que llega', this.myGeneralFormUser.controls['politics'].value, this.myGeneralFormUser.controls['infoProcessing'].value)
   }
+
   submit() {
-    const valueForm = JSON.parse(this.myGeneralFormUser.value).toString();
+    const valueForm = this.myGeneralFormUser.value.toString();
+    console.log(valueForm)
     this.localStore.saveData('dataPrevUser', valueForm);
   }
 
