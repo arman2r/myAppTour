@@ -20,10 +20,11 @@ export class ModalConfirmComponent implements OnInit {
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');
     this.value = this.data
+    console.log(this.value)
   }
 
   getSanitizedHtml(): string {
-    return this.sanitizeService.sanitizeHtml(this.value.description) as string;
+    return this.sanitizeService.sanitizeHtml(this.value[1].description) as string;
   }
 
   cancel() {

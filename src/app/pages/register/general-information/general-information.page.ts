@@ -8,6 +8,7 @@ import { LocalService } from 'src/app/services/local.service';
 import { ModalConfirmComponent } from 'src/app/components/modal-confirm/modal-confirm.component';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { legacyApp } from 'src/assets/politics/legal';
 
 @Component({
   selector: 'app-general-information',
@@ -21,8 +22,8 @@ export class GeneralInformationPage implements OnInit {
   myGeneralFormUser!: FormGroup;
   confirm = false;
   isInfo = false;
-  politics = environment.politics
-  handlingInformation = environment.managementInformation
+  politics = legacyApp[0].politics
+  handlingInformation = legacyApp[1].managementInformation
 
   headerProps: headerProperties = {
     pageTitle: 'Información general',
