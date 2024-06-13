@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonButtons, IonContent } from '@ionic/angular/standalone'; 
+import { DestinationsComponent } from 'src/app/components/destinations/destinations.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { headerProperties } from 'src/app/interfaces/header.interface';
 
@@ -8,7 +9,7 @@ import { headerProperties } from 'src/app/interfaces/header.interface';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [ IonContent, IonButtons, HeaderComponent]
+  imports: [ IonContent, IonButtons, HeaderComponent, DestinationsComponent]
 })
 export class HomePage implements OnInit {
 

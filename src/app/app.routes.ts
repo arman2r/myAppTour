@@ -45,6 +45,6 @@ export const routes: Routes = [
   {
     path: 'register/confirm-phone',
     loadComponent: () => import('./pages/register/confirm-phone/confirm-phone.page').then( m => m.ConfirmPhonePage)
-  }
+  },
   
 ];

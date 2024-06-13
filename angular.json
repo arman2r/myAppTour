@@ -31,7 +31,11 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": [
+              "src/global.scss", 
+              "src/theme/variables.scss",
+              "node_modules/swiper/swiper-bundle.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -106,7 +110,11 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": [
+              "src/global.scss", 
+              "src/theme/variables.scss",
+              "node_modules/swiper/swiper-bundle.min.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -126,7 +134,10 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@ionic/angular-toolkit"]
+    "schematicCollections": [
+      "@ionic/angular-toolkit"
+    ],
+    "analytics": "11812be0-556b-45af-9a12-b36b785c521f"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
