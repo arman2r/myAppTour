@@ -6,7 +6,11 @@
       } @else {
         @if(previousRoute !== '/register'){
           <ion-menu-button auto-hide="false"></ion-menu-button>
-        } 
+        } @else if(currentUrL.includes('/register/individual-information')) {
+          <ion-back-button [defaultHref]="'/register/general-information'"></ion-back-button>
+        } @else if(currentUrL.includes('/register/uploading-documents')) {
+          <ion-back-button [defaultHref]="'/register/individual-information'"></ion-back-button>
+        }
       }
       
     </ion-buttons>

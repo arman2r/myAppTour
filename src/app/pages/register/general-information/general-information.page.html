@@ -80,8 +80,8 @@
           <ion-checkbox
             formControlName="politics"
             color="light"
-            justify="space-between"
-            [indeterminate]="true"
+            justify="space-between" 
+            (ionChange)="openModal($event, politics, 'politics')"
             >Acepta nuestras politicas</ion-checkbox
           >
         </ion-item>
@@ -91,19 +91,20 @@
           <ion-checkbox
             formControlName="infoProcessing"
             color="light"
-            justify="space-between"
-            [indeterminate]="true"
+            justify="space-between" 
+            (ionChange)="openModal($event, handlingInformation, 'information')"
             >Acepta nuestro manejo al tratamiento de datos</ion-checkbox
           >
         </ion-item>
       </ion-col>
-      <ion-col size="12" class="ion-padding-start ion-padding-end"> 
+      <ion-col size="12" class="ion-padding-start ion-padding-end">   
         <ion-button
           color="secondary"
           expand="block"
           shape="round"
           size="large"
-          [disabled]="myGeneralFormUser.invalid || myGeneralFormUser.controls['politics'].value !== true || myGeneralFormUser.controls['infoProcessing'].value !== true"
+          [disabled]="myGeneralFormUser.invalid || !(confirm && isInfo)"
+          (click)="submit()"
           >Continuar</ion-button
         >
       </ion-col>
