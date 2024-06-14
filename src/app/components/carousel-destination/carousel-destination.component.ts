@@ -10,7 +10,10 @@ import Swiper from 'swiper';
   templateUrl: './carousel-destination.component.html',
   styleUrls: ['./carousel-destination.component.scss'],
   standalone: true,
-  imports: [ CommonModule, HttpClientModule, IonContent ]
+  imports: [ CommonModule, HttpClientModule, IonContent ],
+  providers: [
+    HttpClientModule
+  ]
 })
 export class CarouselDestinationComponent implements OnInit, AfterViewInit {
   images: string[] = [];

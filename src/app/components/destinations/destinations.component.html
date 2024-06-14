@@ -1,2 +1,9 @@
-<!-- <app-carousel-destination></app-carousel-destination> -->
-<app-list-destination></app-list-destination>
+<ion-content>
+    <div class="button-toggle">
+        <button (click)="toggleView()"><ion-icon name="view_carousel"></ion-icon></button>
+    </div>
+    <app-carousel-destination *ngIf="isListView"></app-carousel-destination>
+    <app-list-destination *ngIf="!isListView"></app-list-destination>
+</ion-content>
+
+

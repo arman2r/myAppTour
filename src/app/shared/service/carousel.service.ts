@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 export class CarouselService {
   private imagesUrl = 'assets/Json/images.json';
   constructor(
-    //public http: HttpClient
+   // public http: HttpClient
   ) { }
 
-//   getImages(): Observable<string[]> {
-//     return this.http.get<string[]>(this.imagesUrl);
-//   }
+  // getImages(): Observable<string[]> {
+  //   return this.http.get<string[]>(this.imagesUrl);
+  // }
 }
