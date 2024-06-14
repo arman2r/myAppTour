@@ -1,23 +1,68 @@
 <app-header [headerProps]="headerProps"></app-header>
-<ion-content [fullscreen]="true">
-   <ion-row class="ion-padding">
-    <ion-col size="12">
-      <div class="box-document">
-        <ion-icon color="light"
-        slot="icon-only"
-        name="camera"
-        size="large"
-        aria-hidden="true"></ion-icon>
+<ion-content [fullscreen]="true" color="primary" class="ion-padding">
+  <div class="ion-padding-start ion-padding-end">
+    <ion-text color="light"
+      >Capture la foto en un lugar con buena iluminación y lo mejor estable
+      posible</ion-text
+    >
+  </div>
+  <br />
+  <ion-row class="ion-padding">
+    <ion-col size="12" class="ion-margin-bottom">
+      <div
+        class="box-document ion-activatable ripple-parent"
+        (click)="takePicture('front')"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+        @if(!docUrlFront) {
+        <img
+          src="assets/images/document-front.png"
+          alt="documento parte frontal"
+          class="image-card"
+        />
+        } @else {
+        <img
+          [src]="docUrlFront"
+          alt="documento parte frontal"
+          class="image-card"
+        />
+        }
       </div>
     </ion-col>
-    <ion-col size="12">
-      <div class="box-document">
-        <ion-icon color="light"
-        slot="icon-only"
-        name="camera"
-        size="large"
-        aria-hidden="true"></ion-icon>
+    <ion-col size="12" class="ion-margin-top">
+      <div
+        class="box-document ion-activatable ripple-parent"
+        (click)="takePicture('back')"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+        @if(!docUrlBack) {
+        <img
+          src="assets/images/document-back.png"
+          alt="documento parte posterior"
+          class="image-card"
+        />
+        } @else {
+        <img
+          [src]="docUrlBack"
+          alt="documento parte posterior"
+          class="image-card"
+        />
+        }
       </div>
     </ion-col>
-   </ion-row>
+  </ion-row>
 </ion-content>
+<ion-footer class="ion-padding" [translucent]="true" collapse="fade" class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-button
+      color="secondary"
+      expand="block"
+      shape="round"
+      size="large"
+      class="ion-margin"
+      [disabled]="!docUrlFront || !docUrlBack"
+      [routerLink]="['/register/confirm-email']"
+      >Continuar</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

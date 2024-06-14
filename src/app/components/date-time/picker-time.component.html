@@ -1,13 +1,21 @@
-<ion-content [fullscreen]="true">
-  <ion-datetime
-    class="ion-margin-top"
-    [min]="minToday"
-    [max]="maxToday"
-    presentation="date"
-    [preferWheel]="isWheel"
-    #dateTimeElem
-  ></ion-datetime>
-  <ion-button color="primary" expand="block" class="ion-margin" shape="round" fill="outline" size="large" (click)="dateConfirm()">
+<ion-content [fullscreen]="true" class="ion-text-center"> 
+      <ion-datetime
+        class="ion-margin-top"
+        [min]="minToday"
+        [max]="maxToday"
+        presentation="date"
+        [preferWheel]="isWheel"
+        #dateTimeElem
+      ></ion-datetime> 
+  <ion-button
+    color="primary"
+    expand="block"
+    class="ion-margin"
+    shape="round"
+    fill="outline"
+    size="large"
+    (click)="dateConfirm()"
+  >
     Confirmar Fecha
   </ion-button>
-</ion-content> 
+</ion-content>

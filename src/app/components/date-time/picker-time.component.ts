@@ -1,13 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { IonButton, IonContent, IonDatetime, IonFooter, IonModal, ModalController } from '@ionic/angular/standalone';
+import { IonButton, IonCol, IonContent, IonDatetime, IonFooter, IonModal, IonRow, ModalController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-picker-time',
   templateUrl: './picker-time.component.html',
   styleUrls: ['./picker-time.component.scss'],
   standalone: true,
-  imports: [IonContent, IonFooter, IonModal, IonDatetime, IonButton],
+  imports: [IonContent, IonFooter, IonModal, IonDatetime, IonButton, IonRow, IonCol],
   providers: [DatePipe]
 })
 export class PickerTimeComponent implements OnInit {
