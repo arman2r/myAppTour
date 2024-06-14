@@ -1,13 +1,78 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>confirmEmail</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">confirmEmail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-header [headerProps]="headerProps"></app-header>
+<ion-content [fullscreen]="true" color="primary" class="ion-padding">
+  <div class="ion-padding">
+    <ion-text>
+      Enviamos un código de 6 dígitos al correo registrado<br /><br />
+      El código puede tardar aproximadamente 5 minutos no reintentes el envío si
+      consideras que no ha pasado el tiempo contemplado.
+    </ion-text>
+  </div>
+  <form>
+    <ion-row class="ion-margin-top ion-align-center ion-justify-content-center">
+      <ion-col sizeXs="11" sizeSm="6" sizeMd="6" sizeLg="4" sizeXl="3" class="ion-no-padding">
+        <ion-row class="ion-margin-top">
+          <ion-col size="2">
+            <ion-input
+              color="light"
+              type="number"
+              fill="outline"
+              #firstField
+              (ionInput)="codeVerify($event, secondField)"
+              (keydown)="getKey($event, sixField)"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input
+              color="light"
+              type="number"
+              fill="outline"
+              #secondField
+              (ionInput)="codeVerify($event, thirdField)"
+              (keydown)="getKey($event, firstField)"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input
+              color="light"
+              type="number"
+              fill="outline"
+              #thirdField
+              (ionInput)="codeVerify($event, fourField)"
+              (keydown)="getKey($event, secondField)"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input
+              color="light"
+              type="number"
+              fill="outline"
+              #fourField
+              (ionInput)="codeVerify($event, fiveField)"
+              (keydown)="getKey($event, thirdField)"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input
+              color="light"
+              type="number"
+              fill="outline"
+              #fiveField
+              (ionInput)="codeVerify($event, sixField)"
+              (keydown)="getKey($event, fourField)"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input
+              color="light"
+              type="number"
+              fill="outline"
+              #sixField
+              (ionInput)="codeVerify($event, firstField)"
+              (keydown)="getKey($event, fiveField)"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

@@ -35,14 +35,16 @@ export class UploadingDocumentsPage implements OnInit {
   ngOnInit() {
   }
 
-  getPrevData() {
+  /*getPrevData() {
     const getDataPrev = JSON.parse(this.localService.getData('dataPrevUser'));
     if (getDataPrev) {
       this.dataPrev = getDataPrev;  
     } else {
       this.router.navigate(['register/general-information'])
     }
-  }
+  }*/
+
+   
 
   async takePicture(type: string) {
     const image = await Camera.getPhoto({

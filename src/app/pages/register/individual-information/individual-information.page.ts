@@ -86,10 +86,10 @@ export class IndividualInformationPage implements OnInit {
 
 
   getPrevData() {
-    const getDataPrev = JSON.parse(this.localService.getData('dataPrevUser'));
+    const getDataPrev = this.localService.getData('dataPrevUser');
     if (getDataPrev) {
-      this.dataPrev = getDataPrev; 
-      if (getDataPrev.isAgency) {
+      this.dataPrev = JSON.parse(getDataPrev);
+      if (JSON.parse(getDataPrev).isAgency) {
         this.headerProps.pageTitle = 'Información Corporativa';
       }
     } else {
