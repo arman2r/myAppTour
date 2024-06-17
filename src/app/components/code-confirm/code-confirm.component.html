@@ -1,0 +1,74 @@
+<form [formGroup]="codeFormConfirm">
+  <ion-row class="ion-margin-top ion-align-center ion-justify-content-center">
+    <ion-col sizeXs="11" sizeSm="6" sizeMd="6" sizeLg="4" sizeXl="3" class="ion-no-padding">
+      <ion-row class="ion-margin-top">
+        <ion-col size="2">
+          <ion-input
+            color="light"
+            type="number"
+            fill="outline"
+            #firstField
+            formControlName="firstField"
+            (ionInput)="codeVerify($event, secondField)"
+            (keydown)="getKey($event, sixField)"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-input
+            color="light"
+            type="number"
+            fill="outline"
+            #secondField
+            formControlName="secondField"
+            (ionInput)="codeVerify($event, thirdField)"
+            (keydown)="getKey($event, firstField)"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-input
+            color="light"
+            type="number"
+            fill="outline"
+            #thirdField
+            formControlName="thirdField"
+            (ionInput)="codeVerify($event, fourField)"
+            (keydown)="getKey($event, secondField)"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-input
+            color="light"
+            type="number"
+            fill="outline"
+            #fourField
+            formControlName="fourField"
+            (ionInput)="codeVerify($event, fiveField)"
+            (keydown)="getKey($event, thirdField)"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-input
+            color="light"
+            type="number"
+            fill="outline"
+            #fiveField
+            formControlName="fiveField"
+            (ionInput)="codeVerify($event, sixField)"
+            (keydown)="getKey($event, fourField)"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <ion-input
+            color="light"
+            type="number"
+            fill="outline"
+            #sixField
+            formControlName="sixField"
+            (ionInput)="codeVerify($event, firstField)"
+            (keydown)="getKey($event, fiveField)"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</form>
