@@ -2,7 +2,11 @@
 
 <ion-content [fullscreen]="true" color="primary" class="ion-padding">
   <div class="ion-padding-start ion-padding-end">
-    <h2>Registremos su agencia</h2>
+    @if(this.isAgency){
+    <h2>Registre su agencia.</h2>
+    } @else {
+    <h2>Registre sus datos.</h2>
+    }
     <sub
       >Recuerda que los campos marcados con
       <ion-text color="warning">*</ion-text> son obligatorios</sub
@@ -12,6 +16,27 @@
 
   <form class="ion-padding" [formGroup]="individualDataForm">
     <ion-row>
+      @if(!isAgency){
+      <ion-col size="12">
+        <ion-item color="primary" lines="none">
+          <ion-toggle
+            justify="space-between"
+            color="secondary"
+            formControlName="agreeDocs"
+            (ionChange)="ctrlIsAgreeDocs()"
+            id="present-alert"
+            >No deseo compartir mi identificación</ion-toggle
+          >
+        </ion-item>
+      </ion-col>
+      <ion-alert
+        [isOpen]="isAlertOpen"
+        header="Advertencia"
+        subHeader="Para recordar"
+        message="Recuerde que para realizar compras debes registrar tu identificación."
+        [buttons]="alertButtons"
+      ></ion-alert>
+      } @if(isAgreeDocs) {
       <ion-col
         class="ion-margin-top"
         sizeXs="12"
@@ -30,10 +55,12 @@
           errorText="Este campo es requerido"
         >
           <ion-select-option value="1">Cedula</ion-select-option>
+          @if(this.isAgency){
           <ion-select-option value="2"
             >Registro Nacional de turismo</ion-select-option
           >
           <ion-select-option value="3">Camara Comercio</ion-select-option>
+          }
         </ion-select>
       </ion-col>
       <ion-col
@@ -46,7 +73,7 @@
       >
         <ion-input
           color="light"
-          label="Número de documento" 
+          label="Número de documento"
           label-placement="floating"
           fill="outline"
           pattern="[0-9]*"
@@ -70,8 +97,38 @@
           label-placement="floating"
           fill="outline"
           readonly="true"
-          (click)="openDateTime()"
+          (click)="openDateTime('documentExpedition')"
           formControlName="documentExpedition"
+          errorText="Este campo es requerido"
+        >
+          <ion-button fill="clear" slot="end" aria-label="Show/hide">
+            <ion-icon
+              color="light"
+              slot="icon-only"
+              name="calendar"
+              aria-hidden="true"
+            ></ion-icon>
+          </ion-button>
+        </ion-input>
+      </ion-col>
+      }
+      <ion-col
+        class="ion-margin-top"
+        sizeXs="12"
+        sizeSm="12"
+        sizeMd="6"
+        sizeLg="6"
+        sizeXl="6"
+      >
+        <ion-input
+          color="light"
+          label="Fecha de nacimiento"
+          type="date"
+          label-placement="floating"
+          fill="outline"
+          readonly="true"
+          (click)="openDateTime('birthDate')"
+          formControlName="birthDate"
           errorText="Este campo es requerido"
         >
           <ion-button fill="clear" slot="end" aria-label="Show/hide">

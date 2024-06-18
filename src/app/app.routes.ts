@@ -31,6 +31,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/register/general-information/general-information.page').then( m => m.GeneralInformationPage)
   },
   {
+    path: 'register/individual-information/:agency',
+    loadComponent: () => import('./pages/register/individual-information/individual-information.page').then( m => m.IndividualInformationPage)
+  },
+  {
     path: 'register/individual-information',
     loadComponent: () => import('./pages/register/individual-information/individual-information.page').then( m => m.IndividualInformationPage)
   },

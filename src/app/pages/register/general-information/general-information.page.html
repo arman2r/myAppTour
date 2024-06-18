@@ -70,7 +70,22 @@
       </ion-col>
       <ion-col size="12">
         <ion-item color="primary" lines="none">
-          <ion-toggle justify="space-between" color="secondary" formControlName="isAgency"
+          <ion-toggle 
+            justify="space-between" 
+            color="secondary" 
+            formControlName="isTourist"
+            (ionChange)="ctrlIsAgency($event, 'isTourist')"
+            >¿Crear cuenta como turista?</ion-toggle
+          >
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-item color="primary" lines="none">
+          <ion-toggle 
+            justify="space-between" 
+            color="secondary" 
+            formControlName="isAgency"
+            (ionChange)="ctrlIsAgency($event, 'isAgency')"
             >¿Crear cuenta como agencia?</ion-toggle
           >
         </ion-item>
@@ -97,13 +112,13 @@
           >
         </ion-item>
       </ion-col>
-      <ion-col size="12" class="ion-padding-start ion-padding-end">   
+      <ion-col size="12" class="ion-padding-start ion-padding-end">
         <ion-button
           color="secondary"
           expand="block"
           shape="round"
           size="large"
-          [disabled]="myGeneralFormUser.invalid || !(confirm && isInfo)"
+          [disabled]="myGeneralFormUser.invalid || !(confirm && isInfo) || !(myGeneralFormUser.controls['isTourist'].value || myGeneralFormUser.controls['isAgency'].value)"
           (click)="submit()"
           >Continuar</ion-button
         >
