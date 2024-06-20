@@ -12,7 +12,7 @@
       <ion-text color="warning">*</ion-text> son obligatorios</sub
     >
   </div>
-  <br />
+  <br /> 
 
   <form class="ion-padding" [formGroup]="individualDataForm">
     <ion-row>
@@ -36,7 +36,7 @@
         message="Recuerde que para realizar compras debes registrar tu identificación."
         [buttons]="alertButtons"
       ></ion-alert>
-      } @if(isAgreeDocs) {
+      } @if(!isAgreeDocs) {
       <ion-col
         class="ion-margin-top"
         sizeXs="12"
@@ -53,6 +53,7 @@
           fill="outline"
           formControlName="documentType"
           errorText="Este campo es requerido"
+          (ionChange)="documentTypeSelect(individualDataForm.get('documentType')?.value)"
         >
           <ion-select-option value="1">Cedula</ion-select-option>
           @if(this.isAgency){

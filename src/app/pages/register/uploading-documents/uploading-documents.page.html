@@ -1,5 +1,6 @@
 <app-header [headerProps]="headerProps"></app-header>
 <ion-content [fullscreen]="true" color="primary" class="ion-padding">
+  @if(documentTypeToUpload === 1){
   <div class="ion-padding-start ion-padding-end">
     <ion-text color="light"
       >Capture la foto en un lugar con buena iluminación y lo mejor estable
@@ -7,6 +8,7 @@
     >
   </div>
   <br />
+
   <ion-row class="ion-padding">
     <ion-col size="12" class="ion-margin-bottom">
       <div
@@ -51,8 +53,35 @@
       </div>
     </ion-col>
   </ion-row>
+  } @else {
+  <div class="ion-padding-start ion-padding-end">
+    <ion-text color="light"
+      >Cargue el documento en formato PDF, el documento no debe pesar mas de
+      1Mb</ion-text
+    >
+    <form [formGroup]="uploadDocForm">
+      <input hidden type="file" #fileInput (change)="handleFileInput($event)">
+    </form>
+
+    <div *ngIf="pdfSrc" class="pdf-container ion-margin-top">
+      <iframe [src]="pdfSrc" width="100%" height="600px" frameborder="0"></iframe>
+    </div>
+
+    <ion-fab *ngIf="!pdfSrc" slot="fixed" horizontal="center" vertical="center" class="fab-text">
+      <ion-fab-button color="secondary" (click)="uploadDoc()">
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-text class="ion-margin-top">Cargar documento</ion-text>
+    </ion-fab> 
+  </div>
+  }
 </ion-content>
-<ion-footer class="ion-padding" [translucent]="true" collapse="fade" class="ion-no-border">
+<ion-footer
+  class="ion-padding"
+  [translucent]="true"
+  collapse="fade"
+  class="ion-no-border"
+>
   <ion-toolbar color="primary">
     <ion-button
       color="secondary"

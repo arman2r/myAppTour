@@ -112,3 +112,15 @@ ion-menu::part(container) {
 	display: flex;
 	align-items: flex-end;
 }
+
+.ion-invalid {
+	.label-text {
+		&::after{
+			content: '*';
+			position: relative;
+			padding-left: 4px;
+			color:var(--ion-color-danger);
+			font-size: 16px;
+		}
+	} 
+}  

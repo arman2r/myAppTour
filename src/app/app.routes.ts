@@ -39,7 +39,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/register/individual-information/individual-information.page').then( m => m.IndividualInformationPage)
   },
   {
-    path: 'register/uploading-documents',
+    path: 'register/uploading-documents/:documentType',
     loadComponent: () => import('./pages/register/uploading-documents/uploading-documents.page').then( m => m.UploadingDocumentsPage)
   },
   {

@@ -45,7 +45,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class IndividualInformationPage implements OnInit { 
 
   isAgency? = false;
-  isAgreeDocs = true;
+  isAgreeDocs = false;
   isAlertOpen = false;
   alertButtons = ['Sí, entiendo'];
 
@@ -66,9 +66,9 @@ export class IndividualInformationPage implements OnInit {
 
   ngOnInit() { 
     this.individualDataForm = this.fb.group({
-      agreeDocs: [true],
+      agreeDocs: [false],
       documentType: ['', [Validators.required]],
-      documentNumber: ['', [Validators.minLength(8), Validators.maxLength(10), Validators.pattern('^[0-9]+$')]],
+      documentNumber: ['', [Validators.required]],
       documentExpedition: ['', [Validators.required]],
       birthDate: ['', [Validators.required]]
     })
@@ -94,7 +94,7 @@ export class IndividualInformationPage implements OnInit {
   }
 
   ctrlIsAgreeDocs(){
-    const isOpen = this.individualDataForm.get('agreeDocs')?.value
+    const isOpen = !this.individualDataForm.get('agreeDocs')?.value
     this.isAgreeDocs = this.individualDataForm.get('agreeDocs')?.value
     this.isAlertOpen = !isOpen; 
   }
@@ -165,11 +165,28 @@ export class IndividualInformationPage implements OnInit {
     }
   }
 
+  documentTypeSelect(value: any) {
+    console.log(value)
+    if(value !== '1') {
+      this.individualDataForm.get('birthDate')?.clearValidators();
+      this.individualDataForm.get('birthDate')?.updateValueAndValidity(); 
+    } else {
+      console.log('es cedula')
+      this.individualDataForm.get('birthDate')?.addValidators(Validators.required);
+      this.individualDataForm.get('birthDate')?.updateValueAndValidity(); 
+    }
+  }
+
   submit() {
     const valueForm = this.individualDataForm.value;
     console.log([{ ...valueForm }])
     this.localStore.saveData('dataPrevUser', JSON.stringify({...this.dataPrev, valueForm}));
-    this.router.navigate(['register/uploading-documents'])
+    if(this.isAgreeDocs){
+      this.router.navigate(['register/confirm-email'])
+    } else {
+      this.router.navigate(['register/uploading-documents', this.individualDataForm.get('documentType')?.value])
+    }
+    
   }
 
 }
