@@ -60,19 +60,30 @@
       1Mb</ion-text
     >
     <form [formGroup]="uploadDocForm">
-      <input hidden type="file" #fileInput (change)="handleFileInput($event)">
+      <input hidden type="file" #fileInput (change)="handleFileInput()" />
     </form>
 
-    <div *ngIf="pdfSrc" class="pdf-container ion-margin-top">
-      <iframe [src]="pdfSrc" width="100%" height="600px" frameborder="0"></iframe>
-    </div>
-
-    <ion-fab *ngIf="!pdfSrc" slot="fixed" horizontal="center" vertical="center" class="fab-text">
-      <ion-fab-button color="secondary" (click)="uploadDoc()">
+    <ion-fab
+      slot="fixed"
+      horizontal="center"
+      vertical="center"
+      class="fab-text"
+    >
+      <ion-fab-button size="large" color="secondary">
         <ion-icon name="cloud-upload-outline"></ion-icon>
       </ion-fab-button>
       <ion-text class="ion-margin-top">Cargar documento</ion-text>
-    </ion-fab> 
+      <ion-fab-list side="top">
+        @if(pdfSrc){
+        <ion-fab-button color="primary">
+          <ion-icon name="open-outline" (click)="previewPDF()"></ion-icon>
+        </ion-fab-button>
+        }
+        <ion-fab-button color="primary" (click)="handleFileInput()">
+          <ion-icon name="document-attach-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
   </div>
   }
 </ion-content>

@@ -1,22 +1,25 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonCol, IonContent, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonButton, IonCol, IonContent, IonFab, IonFabButton, IonFabList, IonFooter, IonHeader, IonIcon, IonRippleEffect, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { LocalService } from 'src/app/services/local.service';
 import { headerProperties } from 'src/app/interfaces/header.interface';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { addIcons } from 'ionicons';
-import { camera, cloudUploadOutline } from 'ionicons/icons';
+import { camera, cloudUploadOutline, closeOutline, openOutline, documentAttachOutline } from 'ionicons/icons';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FileOpener } from '@capawesome-team/capacitor-file-opener';
+import { FilePicker } from '@capawesome/capacitor-file-picker';
+import { Filesystem } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-uploading-documents',
   templateUrl: './uploading-documents.page.html',
   styleUrls: ['./uploading-documents.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, ReactiveFormsModule, IonFab, IonFabButton, IonText, IonFooter, IonButton, IonRippleEffect, IonTitle, IonToolbar, CommonModule, FormsModule, HeaderComponent, IonRow, IonCol, IonIcon, RouterLink]
+  imports: [IonContent, IonHeader, ReactiveFormsModule, IonFab, IonFabList, IonFabButton, IonText, IonFooter, IonButton, IonRippleEffect, IonTitle, IonToolbar, CommonModule, FormsModule, HeaderComponent, IonRow, IonCol, IonIcon, RouterLink]
 })
 export class UploadingDocumentsPage implements OnInit {
 
@@ -24,7 +27,7 @@ export class UploadingDocumentsPage implements OnInit {
   docUrlBack?: string | null = null;
   documentTypeToUpload = 1;
   uploadDocForm!: FormGroup;
-  pdfSrc!: SafeResourceUrl;
+  pdfSrc!: any;
 
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -36,7 +39,14 @@ export class UploadingDocumentsPage implements OnInit {
   }
 
   constructor(private localService: LocalService, private sanitizer: DomSanitizer, private route: ActivatedRoute, private fb: FormBuilder) {
-    addIcons({ camera, cloudUploadOutline });
+    addIcons({
+      'camera': camera,
+      'cloud-upload-outline': cloudUploadOutline,
+      'close-outline': closeOutline,
+      'open-outline': openOutline,
+      'document-attach-outline': documentAttachOutline
+    });
+
 
     this.uploadDocForm = this.fb.group({
       document: ['', [Validators.required]]
@@ -46,7 +56,7 @@ export class UploadingDocumentsPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(
-      (params: Params) => { 
+      (params: Params) => {
         this.documentTypeToUpload = params['documentType']
         console.log(this.documentTypeToUpload);
       }
@@ -66,7 +76,7 @@ export class UploadingDocumentsPage implements OnInit {
     }
   }*/
 
-   
+
 
   async takePicture(type: string) {
     const image = await Camera.getPhoto({
@@ -75,37 +85,49 @@ export class UploadingDocumentsPage implements OnInit {
       resultType: CameraResultType.Uri,
       correctOrientation: true,
     });
-  
+
     // image.webPath will contain a path that can be set as an image src.
     // You can access the original file using image.path, which can be
     // passed to the Filesystem API to read the raw data of the image,
     // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    if(type === 'front'){
+    if (type === 'front') {
       this.docUrlFront = image.webPath;
     } else {
       this.docUrlBack = image.webPath;
     }
-     
+
   };
 
-  handleFileInput(event: Event) {
-    const files = (event.target as HTMLInputElement).files;
-    if (files && files.length > 0) {
-      const file = files[0];
-      console.log('Selected file:', file);
-      this.previewPDF(file);
-      // You can handle the selected file here, e.g., upload it to a server
+  async handleFileInput() {
+    try {
+      const result = await FilePicker.pickFiles({
+        types: ['application/pdf'],
+        //multiple: false,
+        readData: true
+      });
+      console.log('resultado', result)
+      console.log('antes',this.pdfSrc)
+      result && (this.pdfSrc = result.files[0].path)
+      console.log('despues',this.pdfSrc)
+      /*if (result.files.length > 0) {
+        const file = result.files[0];
+        console.log('Selected file:', file);
+        this.previewPDF(file);
+      }*/
+    } catch (e) {
+      console.error('Error picking file', e);
     }
   }
 
-  previewPDF(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      const base64DataUrl = e.target.result;
-      this.pdfSrc = this.sanitizer.bypassSecurityTrustResourceUrl(base64DataUrl);
-    };
-    reader.readAsDataURL(file);
+  async previewPDF() {
+    try {
+      await FileOpener.openFile({
+        path: this.pdfSrc,
+      });
+    } catch (e) {
+      console.error('Error reading file', e);
+    }
   }
-  
+
 
 }
