@@ -12,7 +12,12 @@ import { headerProperties } from 'src/app/interfaces/header.interface';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonButtons, IonIcon, IonMenuButton, IonButton, IonMenu, IonHeader, IonTitle, IonToolbar, NgClass, IonSearchbar, FormsModule, IonBackButton]
+  imports: [IonButtons, IonIcon, 
+    IonMenuButton, IonButton, 
+    IonMenu, IonHeader, IonTitle, 
+    IonToolbar, NgClass, IonSearchbar, 
+    FormsModule, IonBackButton
+  ]
 })
 export class HeaderComponent implements OnInit {
 

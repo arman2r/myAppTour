@@ -1,5 +1,27 @@
 .card-list {
     display: flex;
     align-items: center;
-    border-radius:12px
+    border-radius:12px;
+    width: 100%
+}
+
+.primary-bg {
+    background: var(--ion-color-primary);
+}
+
+.none-safe-margin-x {
+    --ion-safe-area-left: 0;
+    --ion-safe-area-right: 0;
+}
+
+.no-margin-top{
+    margin: 0 0 0 0 !important;
+}
+
+.img-card {
+    border-end-end-radius: 13px;
+    border-start-end-radius: 13px;
+    width: 150px;
+    height: auto;
+    margin-right: 15px;
 }

@@ -1,101 +1,17 @@
 <ion-content style="border-radius: 15px;">
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <div>
-    <ion-card class="card-list">
-      <img alt="Silhouette of mountains" src="../../../assets/images/1.jpg"
-       style="width: 150px; height: auto; margin-right: 15px;" />
-      
-      <ion-card-content>
-        <h2>Distrito de Knazawa</h2>
-        <small>Antes: $23.000.000</small>
-        <h3>Ahora: $19.990.000 USD</h3>
-      </ion-card-content>
-    </ion-card>
-  </div>
-  <ion-infinite-scroll>
+  <ion-list class="primary-bg none-safe-margin-x no-margin-top" lines="none" [inset]="true">
+    <ion-item *ngFor="let item of items" color="primary" lines="none" class="ion-no-padding ion-margin-bottom">
+      <ion-card class="card-list ion-no-padding ion-no-margin">
+        <img class="img-card" alt="Silhouette of mountains" [src]="item.imgSrc" />
+        <ion-card-content>
+          <h2>{{ item.title }}</h2>
+          <small>Antes: {{ item.oldPrice }}</small>
+          <h3>Ahora: {{ item.newPrice }}</h3>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingText="Please wait..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

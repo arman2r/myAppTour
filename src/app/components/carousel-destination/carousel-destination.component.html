@@ -1,24 +1,23 @@
-<ion-content style="background-color: white; border-radius: 15px;">
+<ion-content>
   <div class="swiper-container mySwiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide"><img class="im-swiper" src="https://docs-demo.ionic.io/assets/madison.jpg" alt=""></div>
-      <div class="swiper-slide"><img class="im-swiper" src="https://docs-demo.ionic.io/assets/madison.jpg" alt=""></div>
-      <div class="swiper-slide"><img class="im-swiper" src="https://docs-demo.ionic.io/assets/madison.jpg" alt=""></div>
-      <div class="swiper-slide"><img class="im-swiper" src="https://docs-demo.ionic.io/assets/madison.jpg" alt=""></div>
-      <div class="swiper-slide"><img class="im-swiper" src="https://docs-demo.ionic.io/assets/madison.jpg" alt=""></div>
-    </div>
-  </div>
-  <!-- <div class="swiper-slide" *ngFor="let image of images">
-    <img [src]="image" alt="">
-  </div> -->
-  <div >
-    <h3>Distrito de Knazawa</h3>
-    <div>
-      <small>Antes: $23.000.000</small>
-      <h3>Ahora: $19.990.000 USD</h3>
-    </div>
-    <div>
-
+      <ion-card class="swiper-slide custom-card" *ngFor="let slide of slides">
+        <img class="im-swiper" [src]="slide.image" alt="">
+        
+        <ion-card-content>
+          <div>
+            <p>{{slide.title}}</p>
+            <div>
+              <small>{{slide.beforePrice}}</small>
+              <p>{{slide.nowPrice}}</p>
+            </div>
+          </div>
+        </ion-card-content>
+        
+      </ion-card>
     </div>
   </div>
 </ion-content>
+<!-- <div class="swiper-slide" *ngFor="let image of images">
+    <img [src]="image" alt="">
+  </div> -->
