@@ -17,7 +17,7 @@ export class PickerTimeComponent implements OnInit {
   @Input() isWheel?: boolean;
   @ViewChild('dateTimeElem') dateTimeElem!: IonDatetime;
 
-  constructor(private datePipe: DatePipe, private modal: ModalController) { }
+  constructor(private datePipe: DatePipe, private dialog: ModalController) { }
 
   ngOnInit() {
     
@@ -33,7 +33,7 @@ export class PickerTimeComponent implements OnInit {
       this.dateTimeElem.value = formattedDate;
     }
 
-    this.modal.dismiss(this.dateTimeElem.value, 'confirm');
+    this.dialog.dismiss(this.dateTimeElem.value, 'confirm');
     
   }
 

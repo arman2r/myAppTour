@@ -1,13 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>confirmPhone</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">confirmPhone</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-header [headerProps]="headerProps"></app-header>
+<ion-content [fullscreen]="true" color="primary" class="ion-padding">
+  <div class="ion-padding ion-text-center">
+    <ion-text>
+      Enviamos un mensaje de texto con un código de 6 dígitos al teléfono registrado<br /><br />
+      El código puede tardar aproximadamente 5 minutos no reintentes el envío si
+      consideras que no ha pasado el tiempo contemplado.
+    </ion-text>
+  </div>
+  <app-code-confirm (codeConfirmIsValid)="isValidConfirm($event)"></app-code-confirm>
+  <div class="ion-padding ion-text-center">
+    <ion-text>
+      No has recibido el código pasados los <app-count-down #countdown [startTimeInMinutes]="startTime" (timeExpired)="handleTimeExpired()"></app-count-down> minutos<br /><br />
+      <ion-button
+        class="ion-text-capitalize"
+        shape="round"
+        color="light"
+        fill="clear"
+        [disabled]="!expiredTime"
+        (click)="resetCountdown()"
+        >Reintenta el envío del código</ion-button
+      >
+    </ion-text>
+  </div>
 </ion-content>
+<ion-footer class="ion-padding" [translucent]="true" collapse="fade" class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-button
+      color="secondary"
+      expand="block"
+      shape="round"
+      size="large"
+      class="ion-margin"
+      [disabled]="!isValidCode"
+      [routerLink]="['/register/confirm-phone']"
+      >Continuar</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

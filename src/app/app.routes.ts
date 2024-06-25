@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: './',
+    redirectTo: 'register/general-information',
     pathMatch: 'full',
   },
   {
@@ -31,11 +31,15 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/register/general-information/general-information.page').then( m => m.GeneralInformationPage)
   },
   {
+    path: 'register/individual-information/:agency',
+    loadComponent: () => import('./pages/register/individual-information/individual-information.page').then( m => m.IndividualInformationPage)
+  },
+  {
     path: 'register/individual-information',
     loadComponent: () => import('./pages/register/individual-information/individual-information.page').then( m => m.IndividualInformationPage)
   },
   {
-    path: 'register/uploading-documents',
+    path: 'register/uploading-documents/:documentType',
     loadComponent: () => import('./pages/register/uploading-documents/uploading-documents.page').then( m => m.UploadingDocumentsPage)
   },
   {
