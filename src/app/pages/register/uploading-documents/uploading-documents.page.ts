@@ -13,6 +13,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FileOpener } from '@capawesome-team/capacitor-file-opener';
 import { FilePicker } from '@capawesome/capacitor-file-picker';
 import { Filesystem } from '@capacitor/filesystem';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-uploading-documents',
@@ -100,32 +101,58 @@ export class UploadingDocumentsPage implements OnInit {
 
   async handleFileInput() {
     try {
-      const result = await FilePicker.pickFiles({
-        types: ['application/pdf'],
-        //multiple: false,
-        readData: true
-      });
-      console.log('resultado', result)
-      console.log('antes',this.pdfSrc)
-      result && (this.pdfSrc = result.files[0].path)
-      console.log('despues',this.pdfSrc)
-      /*if (result.files.length > 0) {
-        const file = result.files[0];
-        console.log('Selected file:', file);
-        this.previewPDF(file);
-      }*/
-    } catch (e) {
-      console.error('Error picking file', e);
+      if (Capacitor.isNativePlatform()) {
+        // En dispositivos móviles
+        const result = await FilePicker.pickFiles({
+          types: ['application/pdf'],
+          readData: true
+        });
+
+        if (result.files.length > 0) {
+          const file = result.files[0]; // de aqui se extrae el archivo que se va enviar al API
+          this.pdfSrc = file.path; // Usar file.uri para dispositivos móviles
+          console.log('Selected file:', file);
+        }
+      } else {
+        // En web
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/pdf';
+        input.style.display = 'none';
+        document.body.appendChild(input);
+
+        input.onchange = async (event: Event) => {
+          const target = event.target as HTMLInputElement;
+          const file = target.files?.[0];
+          if (file) {
+            const blob = new Blob([file], { type: 'application/pdf' });
+            this.pdfSrc = URL.createObjectURL(blob);
+            console.log('Selected file:', file);
+          }
+        };
+
+        input.click();
+      }
+    } catch (error) {
+      console.error('Error picking file', error);
     }
   }
 
   async previewPDF() {
     try {
-      await FileOpener.openFile({
-        path: this.pdfSrc,
-      });
-    } catch (e) {
-      console.error('Error reading file', e);
+      if (this.pdfSrc) {
+        if (Capacitor.isNativePlatform()) {
+          // En dispositivos móviles
+          await FileOpener.openFile({ path: this.pdfSrc });
+        } else {
+          // En web
+          window.open(this.pdfSrc, '_blank');
+        }
+      } else {
+        console.error('No PDF file to preview');
+      }
+    } catch (error) {
+      console.error('Error opening file', error);
     }
   }
 
