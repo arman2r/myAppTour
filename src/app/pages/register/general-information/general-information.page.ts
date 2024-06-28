@@ -9,6 +9,7 @@ import { ModalConfirmComponent } from 'src/app/components/modal-confirm/modal-co
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { legacyApp } from 'src/assets/politics/legal';
+import { generalInformationUser } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-general-information',
@@ -50,7 +51,16 @@ export class GeneralInformationPage implements OnInit {
   constructor(private formBuilder: FormBuilder, private localStore: LocalService, private modalCtrl: ModalController, private router: Router) { }
 
   ngOnInit() {
-    this.buildForm()
+    this.buildForm() 
+  }
+
+  getInfoStorage() {
+    const getGralInfo = this.localStore.getData('dataPrevUser') as any;
+    console.log('existe info en storage', getGralInfo)
+    if(getGralInfo.length !== 0){
+      this.setValuesForm(JSON.parse(getGralInfo))
+    }
+
   }
 
   buildForm() {
@@ -64,6 +74,40 @@ export class GeneralInformationPage implements OnInit {
       politics: [false, [Validators.required]],
       infoProcessing: [false, [Validators.required]],
     })
+
+    this.getInfoStorage()
+  }
+
+  setValuesForm(value: any) {
+    const userObject = {
+      firstName: value.firstName,
+      lastName: value.lastName,
+      email: value.email,
+      phone: value.phone,
+      isTourist: value.isTourist, 
+      isAgency: value.isAgency,
+      politics: value.politics,
+      infoProcessing: value.infoProcessing
+    };
+
+    console.log(value.firstName)
+    // Establecer los valores en el formulario
+    this.myGeneralFormUser.patchValue(userObject);
+
+    if(userObject.isTourist){
+      this.ctrlIsAgency(userObject.isTourist);
+    } else {
+      this.ctrlIsAgency(userObject.isAgency);
+    }
+
+    if(userObject.politics){
+      this.confirm = true;
+    } 
+    
+    if(userObject.infoProcessing) {
+      this.isInfo = true
+    }
+    
   }
 
   async openModal(event: any, selfData: any, type: string) {
@@ -114,7 +158,7 @@ export class GeneralInformationPage implements OnInit {
     console.log('que llega', this.myGeneralFormUser.controls['politics'].value, this.myGeneralFormUser.controls['infoProcessing'].value)
   }
 
-  ctrlIsAgency(event: Event, userType: string) {
+  ctrlIsAgency(userType: string) {
     console.log(this.myGeneralFormUser.get('isTourist')?.value)
     console.log(this.myGeneralFormUser.get('isAgency')?.value)
 

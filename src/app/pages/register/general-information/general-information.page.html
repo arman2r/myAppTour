@@ -74,7 +74,7 @@
             justify="space-between" 
             color="secondary" 
             formControlName="isTourist"
-            (ionChange)="ctrlIsAgency($event, 'isTourist')"
+            (ionChange)="ctrlIsAgency('isTourist')"
             >¿Crear cuenta como turista?</ion-toggle
           >
         </ion-item>
@@ -85,7 +85,7 @@
             justify="space-between" 
             color="secondary" 
             formControlName="isAgency"
-            (ionChange)="ctrlIsAgency($event, 'isAgency')"
+            (ionChange)="ctrlIsAgency('isAgency')"
             >¿Crear cuenta como agencia?</ion-toggle
           >
         </ion-item>
@@ -112,7 +112,7 @@
           >
         </ion-item>
       </ion-col>
-      <ion-col size="12" class="ion-padding-start ion-padding-end">
+      <ion-col size="12" class="ion-padding-start ion-padding-end">        
         <ion-button
           color="secondary"
           expand="block"

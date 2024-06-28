@@ -145,15 +145,16 @@
     </ion-row>
   </form>
 </ion-content>
-<ion-footer class="ion-padding" color="primary">
+<ion-footer class="ion-no-padding">
+  <ion-toolbar class="ion-padding" color="primary">
   <ion-button
     color="secondary"
     expand="block"
     shape="round"
-    size="large"
-    class="ion-margin"
+    size="large"    
     (click)="submit()"
     [disabled]="!individualDataForm.valid"
     >Continuar</ion-button
   >
+</ion-toolbar>
 </ion-footer>
