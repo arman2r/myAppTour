@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { CarouselDestinationComponent } from '../carousel-destination/carousel-destination.component';
 import { ListDestinationComponent } from '../list-destination/list-destination.component';
 import { NgIf } from '@angular/common';
-import { addIcons } from 'ionicons'; 
-import {options} from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import { list } from 'ionicons/icons';
+import { albums } from 'ionicons/icons';
+
 
 @Component({
   selector: 'app-destinations',
@@ -23,7 +25,7 @@ export class DestinationsComponent  implements OnInit {
   constructor(
     
   ) { 
-    addIcons({options});
+    addIcons({'list': list, 'albums': albums});
   }
 
   ngOnInit() {}

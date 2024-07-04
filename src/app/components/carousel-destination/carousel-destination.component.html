@@ -16,8 +16,19 @@
       </ion-card>
     </div>
   </div>-->
-  <swiper-container effect="cards" grab-cursor="true">
+  <!--<swiper-container init="false" #swiperContainer>-->
+  <swiper-container init="false" #swiperContainer>
     <swiper-slide *ngFor="let slide of slides">
+      <ion-fab class="swiper-button-prev" slot="fixed" vertical="center" horizontal="start" [edge]="true">
+        <ion-fab-button>
+          <ion-icon name="chevron-back"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab class="swiper-button-next" slot="fixed" vertical="center" horizontal="end" [edge]="true">
+        <ion-fab-button>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
       <ion-card class="swiper-slide custom-card">
         <img class="im-swiper" [src]="slide.image" alt="" />
         <ion-card-content>
