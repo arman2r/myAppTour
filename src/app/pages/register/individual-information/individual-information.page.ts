@@ -61,7 +61,7 @@ export class IndividualInformationPage implements OnInit {
   dataPrev: any;
 
   constructor(private localService: LocalService, private route: ActivatedRoute, private dialogCtrl: ModalController, private fb: FormBuilder, private localStore: LocalService, private router: Router) {
-    addIcons({ calendar }); 
+    addIcons({ calendar });
   }
 
   ngOnInit() { 
