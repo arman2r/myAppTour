@@ -96,9 +96,11 @@ export class CarouselDestinationComponent implements OnInit, AfterViewInit {
         },
       },
     };
-
-    Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
-    this.swiperContainerRef.nativeElement.initialize(); // Init Swiper
+    setTimeout(() => {
+      Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
+      this.swiperContainerRef.nativeElement.initialize(); // Init Swiper  
+    }, 100);
+    
   }
 
   initializeSwipers() { 
