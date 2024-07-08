@@ -31,64 +31,20 @@ import { SwiperOptions } from 'swiper/types';
 export class CarouselDestinationComponent implements OnInit, AfterViewInit {
   images: string[] = [];
   slides = [
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: "Here's a small text description for the card content. Nothing more, nothing less." },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: "Here's a small text description for the card content. Nothing more, nothing less." },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: "Here's a small text description for the card content. Nothing more, nothing less." },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: "Here's a small text description for the card content. Nothing more, nothing less." },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: "Here's a small text description for the card content. Nothing more, nothing less." },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: "Here's a small text description for the card content. Nothing more, nothing less." },
+    { image: '../../../assets/images/1.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
+    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
+    { image: '../../../assets/images/3.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
+    { image: '../../../assets/images/4.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
+    { image: '../../../assets/images/3.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
+    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
 
   ];
-  @ViewChild('swiperContainer') swiperContainerRef!: ElementRef;
+  @ViewChild('swiperContainer', { static: false }) swiperContainerRef!: ElementRef;
   public swiperParams!: SwiperOptions;
-  
+
 
   constructor() {
-    addIcons({ 'heart':heart, 'chevron-back': chevronBack, 'chevron-forward': chevronForward });
-    afterNextRender((): void => {
-      const slidesArr = this.slides;
-      this.swiperParams = {
-        slidesPerView: 1,
-        effect: 'cards',
-        grabCursor: true,
-        spaceBetween: 30,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },         
-        /*breakpoints: {
-          // when window width is >= 480px
-          480: {
-            slidesPerView: 1,
-            spaceBetween: 30 
-          },
-          // when window width is >= 640px
-          640: {
-            slidesPerView: "auto",
-            spaceBetween: 10,
-            effect: 'coverflow',
-          },
-          920: {
-            slidesPerView: "auto",
-            spaceBetween: 10,
-            effect: 'coverflow',
-          }
-        }*/
-        /*autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-          on: {
-              init() {
-                  // Here you can add some functions after initializing the swiper
-              },
-          },*/
-      };
-
-      Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
-      this.swiperContainerRef.nativeElement.initialize(); // Init Swiper
-    });
-
+    addIcons({ 'heart': heart, 'chevron-back': chevronBack, 'chevron-forward': chevronForward }); 
   }
 
   ngOnInit() {
@@ -96,33 +52,57 @@ export class CarouselDestinationComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     // this.imageService.getImages().subscribe((data: string[]) => {
     //   this.images = data;
     //   console.log(this.images)
 
     // });
-    this.initializeSwipers();
+    this.swiperParams = {
+      slidesPerView: 1,
+      effect: 'cards',
+      grabCursor: true,
+      spaceBetween: 30,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      /*breakpoints: {
+        // when window width is >= 480px
+        480: {
+          slidesPerView: 1,
+          spaceBetween: 30 
+        },
+        // when window width is >= 640px
+        640: {
+          slidesPerView: "auto",
+          spaceBetween: 10,
+          effect: 'coverflow',
+        },
+        920: {
+          slidesPerView: "auto",
+          spaceBetween: 10,
+          effect: 'coverflow',
+        }
+      }*/
+      /*autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },*/
+      on: {
+        init() {
+          // Here you can add some functions after initializing the swiper
+          console.log('inicia el carrusel')
+        },
+      },
+    };
+
+    Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
+    this.swiperContainerRef.nativeElement.initialize(); // Init Swiper
   }
 
-  initializeSwipers() {
-    new Swiper('.mySwiper', {
-      grabCursor: true,
-      effect: 'cards',
-      cardsEffect: {
-        slideShadows: true,
-      },
-
-      // creativeEffect: {
-      //   prev: {
-      //     shadow: true,
-      //     translate: [0, 0, -400],
-      //   },
-      //   next: {
-      //     translate: ['100%', 0, 0],
-      //   },
-      // },
-    });
+  initializeSwipers() { 
+    
 
   }
 }

@@ -1,10 +1,10 @@
 import { NgClass } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { IonBackButton, IonButton, IonButtons, IonHeader, IonIcon, IonMenu, IonMenuButton, IonSearchbar, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons'; 
-import {search} from 'ionicons/icons';
+import {albums, list, search} from 'ionicons/icons';
 import { headerProperties } from 'src/app/interfaces/header.interface';
 
 @Component({
@@ -25,10 +25,12 @@ export class HeaderComponent implements OnInit {
   previousRoute: string = '/';
   currentUrL!: string;
   onOpenSearch = true;
+  isListView: boolean = true;
+  @Output() isListViewToggle = new EventEmitter<boolean>()
   
   constructor(private router: Router) {
     addIcons({search});
-
+    addIcons({'list': list, 'albums': albums});
      
   }
 
@@ -54,6 +56,11 @@ export class HeaderComponent implements OnInit {
 
   toggleSearch(){
     this.onOpenSearch = !this.onOpenSearch;
+  }
+
+  toggleView() {
+    this.isListView = !this.isListView;
+    this.isListViewToggle.emit(!this.isListView);
   }
  
 

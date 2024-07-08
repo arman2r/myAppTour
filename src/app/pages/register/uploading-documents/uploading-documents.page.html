@@ -94,7 +94,8 @@
   class="ion-no-border"
 >
   <ion-toolbar color="primary">
-    <ion-button
+    @if(documentTypeToUpload === 1){
+      <ion-button
       color="secondary"
       expand="block"
       shape="round"
@@ -104,5 +105,17 @@
       [routerLink]="['/register/confirm-email']"
       >Continuar</ion-button
     >
+    } @else {
+      <ion-button
+      color="secondary"
+      expand="block"
+      shape="round"
+      size="large"
+      class="ion-margin"
+      [disabled]="!pdfSrc"
+      [routerLink]="['/register/confirm-email']"
+      >Continuar</ion-button
+    >
+    }
   </ion-toolbar>
 </ion-footer>

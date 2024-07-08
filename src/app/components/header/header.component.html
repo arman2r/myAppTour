@@ -2,17 +2,17 @@
   <ion-toolbar class="none-bg" color="primary">
     <ion-buttons slot="start">
       @if (previousRoute !== './' && previousRoute !== '/.' && previousRoute !== '/register') {
-        <ion-back-button [defaultHref]="[this.previousRoute]"></ion-back-button>
+      <ion-back-button [defaultHref]="[this.previousRoute]"></ion-back-button>
       } @else {
-        @if(previousRoute !== '/register'){
-          <ion-menu-button auto-hide="false"></ion-menu-button>
-        } @else if(currentUrL.includes('/register/individual-information')) {
-          <ion-back-button [defaultHref]="'/register/general-information'"></ion-back-button>
-        } @else if(currentUrL.includes('/register/uploading-documents')) {
-          <ion-back-button [defaultHref]="'/register/individual-information'"></ion-back-button>
-        }
+      @if(previousRoute !== '/register'){
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+      } @else if(currentUrL.includes('/register/individual-information')) {
+      <ion-back-button [defaultHref]="'/register/general-information'"></ion-back-button>
+      } @else if(currentUrL.includes('/register/uploading-documents')) {
+      <ion-back-button [defaultHref]="'/register/individual-information'"></ion-back-button>
       }
-      
+      }
+
     </ion-buttons>
     <ion-title size="medium">{{ headerProps.pageTitle }}</ion-title>
     <ion-buttons slot="secondary">
@@ -21,13 +21,20 @@
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
       }
+      @if (headerProps.toggleView) {
+      <ion-button (click)="toggleView()">
+        @if(isListView){
+        <!--<svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#fff"><path d="M120-160v-80h720v80H120Zm0-560v-80h720v80H120Zm80 400q-33 0-56.5-23.5T120-400v-160q0-33 23.5-56.5T200-640h560q33 0 56.5 23.5T840-560v160q0 33-23.5 56.5T760-320H200Zm0-80h560v-160H200v160Zm0-160v160-160Z"/></svg>-->
+        <ion-icon slot="icon-only" name="list"></ion-icon>
+        } @else{
+        <!--<svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#fff"><path d="M80-360v-240q0-33 23.5-56.5T160-680q33 0 56.5 23.5T240-600v240q0 33-23.5 56.5T160-280q-33 0-56.5-23.5T80-360Zm280 160q-33 0-56.5-23.5T280-280v-400q0-33 23.5-56.5T360-760h240q33 0 56.5 23.5T680-680v400q0 33-23.5 56.5T600-200H360Zm360-160v-240q0-33 23.5-56.5T800-680q33 0 56.5 23.5T880-600v240q0 33-23.5 56.5T800-280q-33 0-56.5-23.5T720-360Zm-360 80h240v-400H360v400Zm120-200Z"/></svg>-->
+        <ion-icon slot="icon-only" name="albums"></ion-icon>
+        }
+      </ion-button>
+      }
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar
-    color="secondary"
-    [ngClass]="{ 'toggle-toolbar-search': onOpenSearch }"
-    class="transition-search"
-  >
+  <ion-toolbar color="secondary" [ngClass]="{ 'toggle-toolbar-search': onOpenSearch }" class="transition-search">
     <ion-searchbar color="secondary" class="search-bar-header"></ion-searchbar>
   </ion-toolbar>
 </ion-header>

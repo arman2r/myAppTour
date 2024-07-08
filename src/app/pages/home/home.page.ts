@@ -15,14 +15,20 @@ export class HomePage implements OnInit {
 
   headerProps: headerProperties = {
     pageTitle: 'Experiencias',
-    search: true
+    search: true,
+    toggleView: true
   }
+  sharedValue: boolean = true;
 
   constructor() {
     
   }
 
   ngOnInit() {
+  }  
+
+  onValueChanged(value: boolean): void {
+    this.sharedValue = !value;
   }
 
 }

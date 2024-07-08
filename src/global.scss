@@ -118,7 +118,7 @@ ion-menu::part(container) {
 
 .ion-invalid {
 	.label-text {
-		&::after{
+		&::after {
 			content: '*';
 			position: relative;
 			padding-left: 4px;

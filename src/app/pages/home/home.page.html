@@ -1,5 +1,5 @@
-<app-header [headerProps]="headerProps" />
+<app-header [headerProps]="headerProps" (isListViewToggle)="onValueChanged($event)"/>
 <ion-content class="ion-padding none-bg">
-  <app-destinations></app-destinations>
+  <app-destinations [isListView]="sharedValue"></app-destinations>
 </ion-content>
 
