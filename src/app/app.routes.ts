@@ -50,4 +50,13 @@ export const routes: Routes = [
     path: 'register/confirm-phone',
     loadComponent: () => import('./pages/register/confirm-phone/confirm-phone.page').then( m => m.ConfirmPhonePage)
   },
+  {
+    path: 'register/register-board',
+    loadComponent: () => import('./pages/register/register-board/register-board.page').then( m => m.RegisterBoardPage)
+  },
+  {
+    path: 'waiting-room',
+    loadComponent: () => import('./pages/register/waiting-room/waiting-room.page').then( m => m.waitingRoomPage)
+  },
+
 ];
