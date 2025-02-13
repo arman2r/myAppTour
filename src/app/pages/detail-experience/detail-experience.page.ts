@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonIcon, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonButton, IonCardTitle, IonCardHeader, IonCardSubtitle, IonLabel, IonItem, IonList, IonThumbnail, IonText } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonIcon, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonButton, IonCardTitle, IonCardHeader, IonCardSubtitle, IonLabel, IonItem, IonList, IonThumbnail, IonText, IonNote } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { headerProperties } from 'src/app/interfaces/header.interface';
 import { CarouselDestinationComponent } from "../../components/carousel-destination/carousel-destination.component";
@@ -14,7 +14,7 @@ import { busOutline, timeOutline, heart } from 'ionicons/icons';
   templateUrl: './detail-experience.page.html',
   styleUrls: ['./detail-experience.page.scss'],
   standalone: true,
-  imports: [IonText, IonList, IonItem, IonLabel, IonCardSubtitle, IonCardHeader, IonCardTitle, IonButton, IonCol, IonRow, IonGrid, IonCardContent, IonCard, IonIcon, IonFabButton, IonFab, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, HeaderComponent, CarouselDestinationComponent, BannerDetailComponent, IonThumbnail]
+  imports: [IonNote, IonText, IonList, IonItem, IonLabel, IonCardSubtitle, IonCardHeader, IonCardTitle, IonButton, IonCol, IonRow, IonGrid, IonCardContent, IonCard, IonIcon, IonFabButton, IonFab, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, HeaderComponent, CarouselDestinationComponent, BannerDetailComponent, IonThumbnail]
 })
 export class DetailExperiencePage {
 

@@ -32,6 +32,8 @@ import { Router } from '@angular/router';
 export class CarouselDestinationComponent implements AfterViewInit {
   @Input() items: any[] = [];  // Array de objetos
   @Input() effect: string = '';  // Efecto de transición
+  @Input() slidePerView?: number = 1;  // items por vista
+  @Input() isAutoPlay?: boolean = false;  // autoplay
   @Output() signalUpdate = new EventEmitter<any>();  // Evento para comunicar con el padre
   @ContentChild(TemplateRef, { static: false }) contentTemplate!: TemplateRef<any>;
   @ViewChild('swiperContainer', { static: false }) swiperContainerRef!: ElementRef;
@@ -49,10 +51,12 @@ export class CarouselDestinationComponent implements AfterViewInit {
     //   console.log(this.images)
 
     // });
+    
     this.swiperParams = {
-      slidesPerView: 1,
+      slidesPerView: this.slidePerView,
+      slidesPerGroup: 1,
       effect: this.effect,
-      grabCursor: true,
+      grabCursor: true, 
       spaceBetween: 30,
       navigation: {
         nextEl: '.swiper-button-next',
@@ -86,7 +90,17 @@ export class CarouselDestinationComponent implements AfterViewInit {
           console.log('inicia el carrusel')
         },
       },
+      
     };
+
+    if (this.isAutoPlay) {
+      this.swiperParams.autoplay = {
+        delay: 5000,
+        disableOnInteraction: true,
+      };
+      this.swiperParams.slidesPerView = this.slidePerView;
+    }
+
     setTimeout(() => {
       Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
       this.swiperContainerRef.nativeElement.initialize(); // Init Swiper  
@@ -95,7 +109,7 @@ export class CarouselDestinationComponent implements AfterViewInit {
   }
 
   updateData() {
-    const dataToSendBack = { updated: true, effectApplied: this.effect };
+    const dataToSendBack = { updated: true, effectApplied: this.effect, slidePerView: this.slidePerView, isAutoPlay: this.isAutoPlay };
     this.signalUpdate.emit(dataToSendBack);
   }
 

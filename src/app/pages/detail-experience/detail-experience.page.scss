@@ -1,18 +1,55 @@
-.detail-banner{
+.detail-banner {
     width: 100%;
     height: 350px;
-    position: relative; 
+    position: relative;
 }
 
-ion-card{
+.detail-carousel {
+    width: 100%;
+    height: 200px;
+}
+
+ion-card {
     border-radius: 20px;
     margin: 0 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    width: 100%;
+    ion-card-content{
+        width: 100%;
+    }
 }
 
-ion-grid{
+ion-grid {
     padding: 0 0 0 0;
 }
 
 ion-thumbnail {
     --size: 30px;
 }
+
+.spacing-grid-item { 
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12 columnas para mayor flexibilidad */
+    gap: 16px; 
+    align-items: stretch;
+}
+
+ion-col {
+    display: flex;
+    flex: 0 0 calc(calc(12 / var(--ion-grid-columns, 12)) * 100%);
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+ion-col[size="12"] {
+    grid-column: span 12;
+}
+
+ion-col[size="6"] {
+    grid-column: span 6;
+}
+
+ 
