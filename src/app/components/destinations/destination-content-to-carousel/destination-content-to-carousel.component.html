@@ -1,0 +1,50 @@
+<ion-card class="swiper-slide custom-card">
+  <div class="bg-image">
+    <img class="im-swiper" [src]="slide.image" [alt]="slide.title" />
+  </div>
+  <ion-grid
+    [fixed]="true"
+    class="justify-center ion-align-items-center text-center flex content-image-principal"
+    (click)="navigateToAgency(slide.agency, slide.title)"
+  >
+    <img class="im-swiper" [src]="slide.image" [alt]="slide.title" />
+  </ion-grid>
+  <ion-card-content class="content-txt">
+    <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+      <ion-fab-button>
+        <ion-icon name="heart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div
+      class="ion-padding-top ion-padding-bottom ion-padding-horizontal"
+      (click)="navigateToAgency(slide.agency, slide.title)"
+    >
+      <ion-card-title class="ion-margin-bottom">{{
+        slide.title
+      }}</ion-card-title>
+      {{ slide.description }}
+    </div>
+    <ion-grid [fixed]="true" class="flex ion-justify-content-end">
+      <ion-row class="ion-justify-content-between">
+        <ion-col>
+          <small>{{ slide.beforePrice }}</small>
+          <p>{{ slide.nowPrice }}</p>
+        </ion-col>
+        <ion-col size="auto" class="flex ion-align-items-end">
+          <ion-row>
+            <ion-fab-button
+              size="large"
+              color="light"
+              class="ion-margin-start no-shadow"
+            >
+              <ion-icon name="paper-plane-outline"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button size="large" color="light" class="ion-margin-start">
+              <ion-icon name="cart-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

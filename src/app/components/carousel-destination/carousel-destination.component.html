@@ -19,35 +19,27 @@
 
 <swiper-container init="false" #swiperContainer class="content-carrusel">
   <div>
-    <ion-fab class="swiper-button-prev" slot="fixed" vertical="center" horizontal="start" [edge]="true">
+    <ion-fab
+      class="swiper-button-prev"
+      slot="fixed"
+      vertical="center"
+      horizontal="start"
+      [edge]="true"
+    >
     </ion-fab>
   </div>
   <div>
-    <ion-fab class="swiper-button-next" slot="fixed" vertical="center" horizontal="end" [edge]="true">
+    <ion-fab
+      class="swiper-button-next"
+      slot="fixed"
+      vertical="center"
+      horizontal="end"
+      [edge]="true"
+    >
     </ion-fab>
   </div>
-  <swiper-slide *ngFor="let slide of slides">
-
-    <ion-card class="swiper-slide custom-card">
-      <div class="content-image">
-        <img class="im-swiper" [src]="slide.image" [alt]="slide.title" />
-      </div>
-      <ion-card-content class="content-txt">
-        <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
-          <ion-fab-button>
-            <ion-icon name="heart"></ion-icon>
-          </ion-fab-button>
-        </ion-fab>
-        <div class="ion-padding-top ion-padding-bottom">
-          <ion-card-title>{{ slide.title }}</ion-card-title>
-          {{slide.description}}
-        </div>
-        <div>
-          <small>{{ slide.beforePrice }}</small>
-          <p>{{ slide.nowPrice }}</p>
-        </div>
-      </ion-card-content>
-    </ion-card>
+  <swiper-slide *ngFor="let slide of items">
+    <ng-container *ngTemplateOutlet="contentTemplate; context: { $implicit: slide }"></ng-container>
   </swiper-slide>
 </swiper-container>
 <!-- <div class="swiper-slide" *ngFor="let image of images">

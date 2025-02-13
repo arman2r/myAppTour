@@ -1,5 +1,15 @@
 @if(isListView){
-<app-carousel-destination></app-carousel-destination>
+<app-carousel-destination
+  [items]="slides"
+  [effect]="effectSlider"
+  (signalUpdate)="onUpdate($event)"
+>
+  <ng-template let-slide>
+    <app-destination-content-to-carousel
+      [slide]="slide"
+    ></app-destination-content-to-carousel>
+  </ng-template>
+</app-carousel-destination>
 } @else{
 <app-list-destination></app-list-destination>
 }

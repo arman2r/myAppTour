@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, afterNextRender } from '@angular/core';
+import { Component, OnInit, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, afterNextRender, signal, Input, Output, EventEmitter, ContentChild, TemplateRef } from '@angular/core';
 import {
   IonCard,
   IonCardContent,
@@ -11,8 +11,9 @@ import {
 } from '@ionic/angular/standalone';
 import Swiper from 'swiper';
 import { addIcons } from 'ionicons';
-import { chevronBack, chevronForward, heart } from 'ionicons/icons';
+import { chevronBack, chevronForward, heart, add, cartOutline, paperPlaneOutline } from 'ionicons/icons';
 import { SwiperOptions } from 'swiper/types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carousel-destination',
@@ -28,29 +29,19 @@ import { SwiperOptions } from 'swiper/types';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CarouselDestinationComponent implements OnInit, AfterViewInit {
-  images: string[] = [];
-  slides = [
-    { image: '../../../assets/images/1.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
-    { image: '../../../assets/images/3.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
-    { image: '../../../assets/images/4.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
-    { image: '../../../assets/images/3.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
-    { image: '../../../assets/images/2.jpg', title: 'Distrito de Knazawa', beforePrice: 'Antes: $23.000.000', nowPrice: 'Ahora: $19.990.000 USD', description: 'En la Kanazawa actual encontrarás arte y arquitectura de estilo tradicional y moderno y una gran variedad de artesanías japonesas.' },
-
-  ];
+export class CarouselDestinationComponent implements AfterViewInit {
+  @Input() items: any[] = [];  // Array de objetos
+  @Input() effect: string = '';  // Efecto de transición
+  @Output() signalUpdate = new EventEmitter<any>();  // Evento para comunicar con el padre
+  @ContentChild(TemplateRef, { static: false }) contentTemplate!: TemplateRef<any>;
   @ViewChild('swiperContainer', { static: false }) swiperContainerRef!: ElementRef;
   public swiperParams!: SwiperOptions;
 
 
-  constructor() {
-    addIcons({ 'heart': heart, 'chevron-back': chevronBack, 'chevron-forward': chevronForward }); 
+  constructor(private router: Router) {
+    addIcons({ heart, paperPlaneOutline, cartOutline, add, chevronBack, chevronForward });
   }
 
-  ngOnInit() {
-
-
-  }
 
   ngAfterViewInit(): void {
     // this.imageService.getImages().subscribe((data: string[]) => {
@@ -60,7 +51,7 @@ export class CarouselDestinationComponent implements OnInit, AfterViewInit {
     // });
     this.swiperParams = {
       slidesPerView: 1,
-      effect: 'cards',
+      effect: this.effect,
       grabCursor: true,
       spaceBetween: 30,
       navigation: {
@@ -100,11 +91,12 @@ export class CarouselDestinationComponent implements OnInit, AfterViewInit {
       Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
       this.swiperContainerRef.nativeElement.initialize(); // Init Swiper  
     }, 100);
-    
-  }
-
-  initializeSwipers() { 
-    
 
   }
+
+  updateData() {
+    const dataToSendBack = { updated: true, effectApplied: this.effect };
+    this.signalUpdate.emit(dataToSendBack);
+  }
+
 }

@@ -1,4 +1,100 @@
 <app-header [headerProps]="headerProps" />
-<ion-content [fullscreen]="true" color="primary">
-  <h1>Prado de ensueño</h1>
+<ion-content [fullscreen]="true" color="primary" class="ion-padding-horizontal">
+  <div class="detail-banner">
+    <app-carousel-destination [items]="slides" [effect]="effectSlider">
+      <ng-template let-slide>
+        <app-banner-detail [slide]="slide"></app-banner-detail>
+      </ng-template>
+    </app-carousel-destination>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" [edge]="true">
+      <ion-fab-button color="secondary">
+        <ion-icon name="heart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+  <ion-grid>
+    <ion-row class="ion-align-items-stretch  ion-align-self-stretch">
+      <ion-col class="ion-padding-top" size="12">
+        <ion-card>
+          <ion-card-content>
+            <p>
+              {{ isExpanded ? description : (description.length > 150 ?
+              description.substring(0, 150) + '...' : description) }}
+            </p>
+            <ion-button fill="clear" (click)="toggleDescription()">
+              {{ isExpanded ? 'Leer menos' : 'Leer más' }}
+              <ion-icon [name]="isExpanded ? 'remove' : 'add'"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" class="ion-padding-vertical">
+        <ion-card class="ion-padding">
+          <ion-card-title class="ion-text-center ion-margin-bottom">
+            Salida
+          </ion-card-title>
+          <ion-card-content class="ion-text-center ion-no-padding">
+            <ion-icon size="large" name="time-outline"></ion-icon>
+            <br>
+            <ion-text color="primary"
+              ><sub>
+                 15 de Septiembre de 2025<br>
+                Hora: 7:00 am
+                lorem
+              </sub>
+            </ion-text>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" class="ion-padding-vertical">
+        <ion-card class="ion-padding">
+          <ion-card-title class="ion-text-center ion-margin-bottom">
+            Incluye transporte
+          </ion-card-title>
+          <ion-card-content class="ion-text-center ion-no-padding">
+            <ion-icon size="large" name="bus-outline"></ion-icon>
+            <br>
+            <ion-text color="primary"
+              ><sub>Consulte la guía de transporte</sub></ion-text
+            >
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Incluye</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-no-padding">
+            <ion-list>
+              <ion-item>
+                <ion-thumbnail slot="start">
+                  <img src="assets/images/desayuno.svg" alt="desayuno" />
+                </ion-thumbnail>
+                <ion-label>Desayuno</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-thumbnail slot="start">
+                  <img src="assets/images/almuerzo.svg" alt="almuerzo" />
+                </ion-thumbnail>
+                <ion-label>Almuerzo</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-thumbnail slot="start">
+                  <img src="assets/images/onces.svg" alt="onces" />
+                </ion-thumbnail>
+                <ion-label>Onces</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-thumbnail slot="start">
+                  <img src="assets/images/cena.svg" alt="cena" />
+                </ion-thumbnail>
+                <ion-label>Cena</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

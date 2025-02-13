@@ -52,6 +52,9 @@ body{
 
 .search-bar-header {
     --box-shadow: 0;
+	padding-top: inherit !important;
+	padding-bottom: inherit !important;
+	min-height: inherit !important;
 }
 
 .transition-search {

@@ -1,14 +1,17 @@
-<ion-content [fullscreen]="true">
-  <div class="wating-room-bg">
-    <div class="up-clock">
-      <div class="wave wave-up"></div>
-    </div>
-    <div class="down-clock">
-      <div class="wave wave-down"></div>
-    </div>
+<div class="wating-room-bg">
+  <div class="up-clock">
+    <div class="wave wave-up"></div>
   </div>
+  <div class="down-clock">
+    <div class="wave wave-down"></div>
+  </div>
+</div>
+<ion-content [fullscreen]="true"  [scrollY]="false">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid class="full-height ion-padding">
-    <ion-row class="ion-align-items-center full-height ion-padding">
+    <ion-row class="ion-align-items-end full-height ion-padding-horizontal">
       <ion-col size="12" class="ion-text-center">
         <ion-text color="light">
           <h1>Aguarde</h1>
@@ -16,7 +19,15 @@
         <ion-text color="light">
           <h3>Estamos validando su información</h3>
         </ion-text>
-        <ion-text color="light">
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-icon id="open-info-center" name="information-circle-outline" color="light" size="large"></ion-icon>
+        <ion-popover trigger="open-info-center" side="top" alignment="center">
+          <ng-template>
+            <ion-content class="ion-padding">Estamos validando la información que suministraste, puede tomarnos un lapso máximo de 24 horas, hasta ese momento solo podras llegar hasta aquí, pero puedes estar actualizando esta pantalla, en caso de obtener una respuesta antes de lo acordado.</ion-content>
+          </ng-template>
+        </ion-popover>
+        <ion-text color="light" id="footer">
           <p>En un lapso de 24 horas estaremos contactando con usted.</p>
         </ion-text>
       </ion-col>
