@@ -22,7 +22,7 @@
       class="ion-align-items-stretch ion-align-self-stretch spacing-grid-item"
     >
       <ion-col class="ion-no-padding ion-padding-top" size="12">
-        <ion-card>
+        <ion-card class="item-in-col">
           <ion-card-content>
             <p>
               {{ isExpanded ? description : (description.length > 150 ?
@@ -36,16 +36,16 @@
         </ion-card>
       </ion-col>
       <ion-col size="6" class="ion-no-padding">
-        <ion-card class="ion-padding">
+        <ion-card class="ion-padding item-in-col">
           <ion-card-title class="ion-text-center ion-margin-bottom">
-            Salida
+            CheckIn
           </ion-card-title>
           <ion-card-content class="ion-text-center ion-no-padding">
             <ion-icon size="large" name="time-outline"></ion-icon>
             <br />
             <ion-text color="primary"
               ><sub>
-                15 de Septiembre de 2025<br />
+                15 de Septiembre<br />
                 Hora: 7:00 am
               </sub>
             </ion-text>
@@ -53,23 +53,46 @@
         </ion-card>
       </ion-col>
       <ion-col size="6" class="ion-no-padding">
-        <ion-card class="ion-padding">
+        <ion-card class="ion-padding item-in-col">
           <ion-card-title class="ion-text-center ion-margin-bottom">
-            Transporte
+            CheckOut
           </ion-card-title>
           <ion-card-content class="ion-text-center ion-no-padding">
-            <ion-icon size="large" name="bus-outline"></ion-icon>
+            <ion-icon size="large" name="time-outline"></ion-icon>
             <br />
             <ion-text color="primary"
-              ><sub
-                >Consulte aquí su punto de partida y la guía de transporte</sub
-              ></ion-text
-            >
+              ><sub>
+                30 de Septiembre<br />
+                Hora: 7:00 pm
+              </sub>
+            </ion-text>
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
-        <ion-card>
+        <ion-card class="ion-padding item-in-col row-in-card">
+          <div>
+            <ion-card-title class="ion-text-center ion-margin-bottom">
+              Transporte
+            </ion-card-title>
+            <ion-card-content class="ion-text-center ion-no-padding">
+              <ion-icon size="large" name="bus-outline"></ion-icon>
+              <br />
+              <ion-text color="primary"
+                ><sub
+                  >Consulte aquí su punto de partida y la guía de
+                  transporte</sub
+                ></ion-text
+              >
+            </ion-card-content>
+          </div>
+          <div>
+            
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding">
+        <ion-card class="item-in-col">
           <ion-card-header>
             <ion-card-title>Incluye</ion-card-title>
           </ion-card-header>
@@ -108,21 +131,50 @@
         </ion-card>
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
-        <div class="detail-carousel">
-          <app-carousel-destination
-            [items]="slides"
-            [effect]="effectSlider"
-            [slidePerView]="3"
-            [isAutoPlay]="true"
-          >
-            <ng-template let-slide>
-              <div>
-                <img [src]="slide.image" [alt]="slide.title" /> 
-              </div>
-            </ng-template>
-          </app-carousel-destination>
-        </div>
+        <ion-card class="item-in-col">
+          <ion-card-header>
+            <ion-card-title> Souvenirs </ion-card-title>
+            <ion-card-subtitle>
+              Acompaña tu regreso a casa con un recuerdo de tu viaje
+            </ion-card-subtitle>
+          </ion-card-header>
+          <div class="detail-carousel ion-margin-bottom ion-padding-horizontal">
+            <app-carousel-destination
+              [items]="souvenirs"
+              [effect]="null"
+              [slidePerView]="3"
+              [isAutoPlay]="true"
+              [spaceItems]="10"
+            >
+              <ng-template let-slide>
+                <app-carrusel-item [slide]="slide"></app-carrusel-item>
+              </ng-template>
+            </app-carousel-destination>
+          </div>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    class="ion-margin-end"
+    [class]="lastScrollPosition ? 'out-visible' : 'on-visible'"
+  >
+    <ion-fab-button>
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-footer>
+    <ion-toolbar color="primary" class="ion-no-margin">
+      <ion-button
+        shape="round"
+        color="secondary"
+        expand="block"
+        class="ion-padding-vertical"
+        >Agregar al carrito</ion-button
+      >
+    </ion-toolbar>
+  </ion-footer>
 </ion-content>

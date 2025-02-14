@@ -18,6 +18,7 @@
 <!--<swiper-container init="false" #swiperContainer>-->
 
 <swiper-container init="false" #swiperContainer class="content-carrusel">
+  @if (this.effect) {
   <div>
     <ion-fab
       class="swiper-button-prev"
@@ -38,8 +39,12 @@
     >
     </ion-fab>
   </div>
+  }
+
   <swiper-slide *ngFor="let slide of items">
-    <ng-container *ngTemplateOutlet="contentTemplate; context: { $implicit: slide }"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="contentTemplate; context: { $implicit: slide }"
+    ></ng-container>
   </swiper-slide>
 </swiper-container>
 <!-- <div class="swiper-slide" *ngFor="let image of images">

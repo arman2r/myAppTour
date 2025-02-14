@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, afterNextRender, signal, Input, Output, EventEmitter, ContentChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef, afterNextRender, signal, Input, Output, EventEmitter, ContentChild, TemplateRef, SimpleChanges } from '@angular/core';
 import {
   IonCard,
   IonCardContent,
@@ -31,7 +31,8 @@ import { Router } from '@angular/router';
 })
 export class CarouselDestinationComponent implements AfterViewInit {
   @Input() items: any[] = [];  // Array de objetos
-  @Input() effect: string = '';  // Efecto de transición
+  @Input() effect: string | null = '';  // Efecto de transición
+  @Input() spaceItems?: number = 30;  // Efecto de transición
   @Input() slidePerView?: number = 1;  // items por vista
   @Input() isAutoPlay?: boolean = false;  // autoplay
   @Output() signalUpdate = new EventEmitter<any>();  // Evento para comunicar con el padre
@@ -44,6 +45,11 @@ export class CarouselDestinationComponent implements AfterViewInit {
     addIcons({ heart, paperPlaneOutline, cartOutline, add, chevronBack, chevronForward });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.carouselInitFn();
+  }
 
   ngAfterViewInit(): void {
     // this.imageService.getImages().subscribe((data: string[]) => {
@@ -51,13 +57,15 @@ export class CarouselDestinationComponent implements AfterViewInit {
     //   console.log(this.images)
 
     // });
-    
+    this.carouselInitFn();
+  }
+
+  carouselInitFn() {
     this.swiperParams = {
       slidesPerView: this.slidePerView,
-      slidesPerGroup: 1,
-      effect: this.effect,
-      grabCursor: true, 
-      spaceBetween: 30,
+      slidesPerGroup: 1,      
+      grabCursor: true,
+      spaceBetween: this.spaceItems,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -90,7 +98,7 @@ export class CarouselDestinationComponent implements AfterViewInit {
           console.log('inicia el carrusel')
         },
       },
-      
+
     };
 
     if (this.isAutoPlay) {
@@ -101,11 +109,14 @@ export class CarouselDestinationComponent implements AfterViewInit {
       this.swiperParams.slidesPerView = this.slidePerView;
     }
 
+    if(this.effect !== null) {
+      this.swiperParams.effect = this.effect;
+    }
+
     setTimeout(() => {
       Object.assign(this.swiperContainerRef.nativeElement, this.swiperParams); // Add parameters to the Swiper
       this.swiperContainerRef.nativeElement.initialize(); // Init Swiper  
     }, 100);
-
   }
 
   updateData() {

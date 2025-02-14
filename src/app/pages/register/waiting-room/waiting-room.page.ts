@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonRow, IonGrid, IonCol, IonText, IonIcon, IonPopover, IonRefresher, IonRefresherContent, ToastController } from '@ionic/angular/standalone';
+import { IonContent, IonRow, IonGrid, IonCol, IonText, IonIcon, IonPopover, IonRefresher, IonRefresherContent, ToastController, IonFooter, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { informationCircleOutline } from 'ionicons/icons' 
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-waiting-room',
   templateUrl: './waiting-room.page.html',
   styleUrls: ['./waiting-room.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonText, IonPopover, IonRow, IonContent, IonGrid, IonRow, IonCol, CommonModule, IonRefresher, IonRefresherContent]
+  imports: [RouterModule, IonButton, IonFooter, IonIcon, IonText, IonPopover, IonRow, IonContent, IonGrid, IonRow, IonCol, CommonModule, IonRefresher, IonRefresherContent]
 })
 export class waitingRoomPage {
 
