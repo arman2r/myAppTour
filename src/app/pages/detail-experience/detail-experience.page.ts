@@ -9,6 +9,8 @@ import { BannerDetailComponent } from './components/banner-detail/banner-detail.
 import { addIcons } from 'ionicons';
 import { busOutline, timeOutline, heart, cartOutline } from 'ionicons/icons';
 import { CarruselItemComponent } from "./components/carrusel-item/carrusel-item.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { GoogleMap } from '@capacitor/google-maps';
 
 @Component({
   selector: 'app-detail-experience',
@@ -44,9 +46,15 @@ import { CarruselItemComponent } from "./components/carrusel-item/carrusel-item.
     BannerDetailComponent,
     IonThumbnail,
     CarruselItemComponent
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DetailExperiencePage implements AfterViewInit {
+
+
+  @ViewChild('map')
+  mapRef!: ElementRef<HTMLElement>;
+  newMap!: GoogleMap;
 
   headerProps: headerProperties = {
     pageTitle: 'Prado de en sueño',
@@ -55,7 +63,7 @@ export class DetailExperiencePage implements AfterViewInit {
 
   @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
 
-  lastScrollPosition: boolean = false; 
+  lastScrollPosition: boolean = false;
 
   isExpanded: boolean = false;
 
@@ -100,7 +108,7 @@ export class DetailExperiencePage implements AfterViewInit {
 
   ngAfterViewInit() {
     // Espera un momento para asegurar que el DOM esté listo
-    setTimeout(() => {
+    setTimeout(async () => {
       // Accede al shadow DOM de ion-content
       const innerScrollDiv = (this.content as any).el.shadowRoot.querySelector('.inner-scroll');
 
@@ -119,6 +127,33 @@ export class DetailExperiencePage implements AfterViewInit {
         });
       }
     }, 100);
+  }
+
+  async ionViewDidEnter() {
+    await this.initializeMap();
+  }
+
+  async initializeMap() {
+    console.log(this.mapRef)
+    if ( document.getElementById('map') === null) {
+      console.error('El elemento del mapa no está disponible.');
+      return;
+    }
+    const apiKey = 'AIzaSyAn3ZPXLhSIQlAHuA3blxzD_mQYygvo3t4'; // Reemplaza con tu API Key de Google Maps
+
+    // Crea el mapa
+    this.newMap = await GoogleMap.create({
+      id: 'my-map', // Identificador único para esta instancia del mapa
+      element: document.getElementById('map') as any, // Referencia al contenedor del mapa
+      apiKey: apiKey, // Tu API Key de Google Maps
+      config: {
+        center: {
+          lat: 33.6, // Latitud inicial
+          lng: -117.9, // Longitud inicial
+        },
+        zoom: 12, // Nivel de zoom inicial
+      },
+    });
   }
 
 }
