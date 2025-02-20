@@ -33,7 +33,7 @@ import { headerProperties } from 'src/app/interfaces/header.interface';
     IonAvatar
   ]
 })
-export class RegisterBoardPage implements OnInit {
+export class RegisterBoardPage {
 
   headerProps: headerProperties = {
     pageTitle: 'Board de registro',
@@ -42,7 +42,5 @@ export class RegisterBoardPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
 }

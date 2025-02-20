@@ -70,8 +70,11 @@
         </ion-card>
       </ion-col>
       <ion-col size="12" class="ion-no-padding">
-        <ion-card class="ion-no-padding" style="display: flex;flex-flow: wrap;">
-          <div class="ion-padding" style="display: flex;flex:1 0 45%;flex-flow: column;width: 45%;">
+        <ion-card class="item-in-col ion-no-padding ion-no-margin" style="display: flex; flex-flow: wrap">
+          <div
+            class="ion-padding"
+            style="display: flex; flex: 1 0 45%; flex-flow: column; width: 45%"
+          >
             <ion-card-title class="ion-text-center ion-margin-bottom">
               Transporte
             </ion-card-title>
@@ -87,7 +90,7 @@
             </ion-card-content>
           </div>
           <div class="container-map">
-            <capacitor-google-map id="map"></capacitor-google-map>
+            <app-map style="width: 100%;height: 100%;display: flex;" [zoom]="11" [points]="pointsRouter"></app-map>
           </div>
         </ion-card>
       </ion-col>

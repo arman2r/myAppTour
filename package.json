@@ -28,20 +28,18 @@
     "@capacitor/core": "^7.0.0",
     "@capacitor/filesystem": "^7.0.0",
     "@capacitor/geolocation": "^7.1.0",
-    "@capacitor/google-maps": "^7.0.0",
     "@capacitor/haptics": "7.0.0",
     "@capacitor/keyboard": "7.0.0",
     "@capacitor/status-bar": "7.0.0",
     "@capawesome-team/capacitor-file-opener": "^7.0.0",
     "@capawesome/capacitor-file-picker": "^7.0.0",
     "@ionic/angular": "^8.4.3",
-    "@types/google-maps": "^4.0.0",
     "crypto-js": "^4.2.0",
     "http-proxy-middleware": "^3.0.3",
     "ionicons": "^7.2.1",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.4",
-    "tslib": "^2.3.0",
+    "tslib": "^2.8.1",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
@@ -54,9 +52,11 @@
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.2",
     "@angular/language-service": "^17.0.2",
-    "@capacitor/cli": "^7.0.1",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/google-maps": "^7.0.0",
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/crypto-js": "^4.2.2",
+    "@types/google.maps": "^3.58.1",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -71,7 +71,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^6.0.1"
   },
   "description": "An Ionic project"
 }
