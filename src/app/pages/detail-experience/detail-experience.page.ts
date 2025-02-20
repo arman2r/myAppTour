@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonIcon, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonButton, IonCardTitle, IonCardHeader, IonCardSubtitle, IonLabel, IonItem, IonList, IonThumbnail, IonText, IonNote, IonFooter } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonFab, IonFabButton, IonIcon, IonCard, IonCardContent, IonGrid, IonRow, IonCol, IonButton, IonCardTitle, IonCardHeader, IonCardSubtitle, IonLabel, IonItem, IonList, IonThumbnail, IonText, IonNote, IonFooter, ModalController } from '@ionic/angular/standalone';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { headerProperties } from 'src/app/interfaces/header.interface';
 import { CarouselDestinationComponent } from "../../components/carousel-destination/carousel-destination.component";
@@ -10,6 +10,7 @@ import { addIcons } from 'ionicons';
 import { busOutline, timeOutline, heart, cartOutline } from 'ionicons/icons';
 import { CarruselItemComponent } from "./components/carrusel-item/carrusel-item.component";
 import { MapComponent, pointsMap } from "../../components/map/map.component";
+import { DetailMapModalComponent } from './components/detail-map-modal/detail-map-modal.component';
 
 @Component({
   selector: 'app-detail-experience',
@@ -97,7 +98,7 @@ export class DetailExperiencePage implements AfterViewInit {
 
   effectSlider = 'fade';
 
-  constructor() {
+  constructor(private modalController: ModalController) {
     addIcons({ heart, timeOutline, busOutline, cartOutline });
   }
 
@@ -126,6 +127,21 @@ export class DetailExperiencePage implements AfterViewInit {
         });
       }
     }, 100);
+  }
+
+  OpenDetailMapModal() {
+    this.modalController.create({
+      component: DetailMapModalComponent,
+      cssClass: 'modal-map',
+      initialBreakpoint: 0.75,
+      breakpoints: [0, 0.75, 0.95],
+      handle: true,
+      componentProps: {
+        data: this.pointsRouter
+      }
+    }).then(modal => {
+      modal.present();
+    });
   }
 
 }

@@ -1,5 +1,5 @@
 /// <reference types="google.maps" />
-import { AfterViewInit, Component, ElementRef, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef } from '@angular/core';
 import { GoogleMap, Polyline } from '@capacitor/google-maps';
 import { printCurrentPosition } from 'src/app/utils/geolocation';
 
@@ -25,10 +25,14 @@ export class MapComponent implements AfterViewInit {
   @Input() zoom?: number = 12;
   @Input() points?: pointsMap[] = [];
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   async ngAfterViewInit() {
-    await this.initializeMap();
+    setTimeout(async () => {
+      this.cdr.detectChanges();
+      await this.initializeMap();
+    }, 500);
+    
   }
 
 
@@ -138,9 +142,7 @@ export class MapComponent implements AfterViewInit {
         strokeWeight: 3,
         geodesic: true,
       }
-    ];
-
-    console.log('Polyline data:', lines);
+    ];    
 
     if (this.newMap) {
       await this.newMap.addPolylines(lines);
