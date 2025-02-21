@@ -19,25 +19,41 @@ export interface pointsMap {
 })
 export class MapComponent implements AfterViewInit {
 
-  @ViewChild('map')
-  mapRef!: ElementRef<HTMLElement>;
+  @ViewChild('mapContainer', { static: true }) mapContainer!: ElementRef;
   newMap!: GoogleMap;
   @Input() zoom?: number = 12;
   @Input() points?: pointsMap[] = [];
+  
+  private apiKey = 'AIzaSyDFJ0cpwr1wHdktxm9lzKBAp7AcYdy8Yag'; // Reemplaza con tu API Key de Google Maps
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   async ngAfterViewInit() {
-    setTimeout(async () => {
+    requestAnimationFrame(async () => {
       this.cdr.detectChanges();
       await this.initializeMap();
-    }, 500);
-    
+    });
   }
 
+  async loadGoogleMaps() {
+    if (typeof google === 'undefined' || !google.maps) {
+      return new Promise<void>((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=places`;
+        script.async = true;
+        script.defer = true;
+        script.onload = () => resolve();
+        script.onerror = (error) => reject(error);
+        document.body.appendChild(script);
+      });
+    }
+  }
 
   async initializeMap() {
-    const apiKey = 'AIzaSyDFJ0cpwr1wHdktxm9lzKBAp7AcYdy8Yag'; // Reemplaza con tu API Key de Google Maps
+    if (this.newMap) {
+      await this.newMap.destroy();
+      this.newMap = null!;
+    }
 
     // Obtiene las coordenadas actuales
     const coordinates = await printCurrentPosition();
@@ -49,8 +65,8 @@ export class MapComponent implements AfterViewInit {
       // Crea el mapa con las coordenadas actuales
       this.newMap = await GoogleMap.create({
         id: 'my-map', // Identificador único para esta instancia del mapa
-        element: document.getElementById('map') as HTMLAnchorElement, // Referencia al contenedor del mapa
-        apiKey: apiKey, // Tu API Key de Google Maps
+        element: this.mapContainer.nativeElement, // Referencia al contenedor del mapa
+        apiKey: this.apiKey, // Tu API Key de Google Maps
         config: {
           center: {
             lat: coordinates.latitude, // Usa la latitud obtenida
@@ -101,8 +117,8 @@ export class MapComponent implements AfterViewInit {
       // Crea el mapa con una ubicación por defecto
       this.newMap = await GoogleMap.create({
         id: 'my-map', // Identificador único para esta instancia del mapa
-        element: document.getElementById('map') as HTMLAnchorElement, // Referencia al contenedor del mapa
-        apiKey: apiKey, // Tu API Key de Google Maps
+        element: this.mapContainer.nativeElement, // Referencia al contenedor del mapa
+        apiKey: this.apiKey, // Tu API Key de Google Maps
         config: {
           center: {
             lat: 4.4399926, // Latitud por defecto
@@ -152,6 +168,13 @@ export class MapComponent implements AfterViewInit {
 
   async getRoute(points: { lat: number; lng: number }[]): Promise<{ lat: number; lng: number }[] | null> {
     return new Promise((resolve, reject) => {
+
+      if (typeof google === 'undefined' || !google.maps) {
+        console.error('Google Maps API no está disponible.');
+        reject(null);
+        return;
+      }
+
       const directionsService = new google.maps.DirectionsService();
 
       const waypoints = points.slice(1, -1).map(point => ({
@@ -180,5 +203,5 @@ export class MapComponent implements AfterViewInit {
       });
     });
   }
-
+  
 }

@@ -30,7 +30,7 @@
     "@capacitor/geolocation": "^7.1.0",
     "@capacitor/haptics": "7.0.0",
     "@capacitor/keyboard": "7.0.0",
-    "@capacitor/status-bar": "7.0.0",
+    "@capacitor/status-bar": "^7.0.0",
     "@capawesome-team/capacitor-file-opener": "^7.0.0",
     "@capawesome/capacitor-file-picker": "^7.0.0",
     "@ionic/angular": "^8.4.3",

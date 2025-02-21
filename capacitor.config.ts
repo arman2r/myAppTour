@@ -5,9 +5,14 @@ const config: CapacitorConfig = {
   appName: 'Xperyz',
   webDir: 'www',
   plugins: {
-    GoogleMaps: {
-      apiKey: 'AIzaSyDFJ0cpwr1wHdktxm9lzKBAp7AcYdy8Yag', // Reemplaza con tu API Key
+    StatusBar: {
+      overlaysWebView: false,
+      style: "DARK",
+      backgroundColor: "#47176d",
     },
+    CapacitorGoogleMaps: {
+      apiKey: 'AIzaSyDFJ0cpwr1wHdktxm9lzKBAp7AcYdy8Yag', // Reemplaza con tu API Key
+    }
   },
 };
 
